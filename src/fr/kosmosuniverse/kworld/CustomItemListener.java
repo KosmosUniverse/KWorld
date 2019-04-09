@@ -91,5 +91,74 @@ public class CustomItemListener implements Listener {
 			}
 		}
 	}
+	
+	@EventHandler
+	public void onWindStickClick(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		Action action = event.getAction();
+		ItemStack item = event.getItem();
+		
+		if (item == null)
+			return ;
+		
+		if (item.getItemMeta().getDisplayName().contains("§bWIND STICK TIER I")) {
+			if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER I") &&
+					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
+				ItemMeta itM = item.getItemMeta();
+				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+				int dur = Integer.parseInt(lore) - 1;
+				String newLore = "Durability:" + Integer.toString(dur) + "/200";
+				itM.setLore(Arrays.asList(newLore));
+				item.setItemMeta(itM);
+				if (dur == 0)
+					player.getInventory().remove(item);
+						
+				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 1));
+				}
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER II") &&
+					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
+				ItemMeta itM = item.getItemMeta();
+				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+				int dur = Integer.parseInt(lore) - 1;
+				String newLore = "Durability:" + Integer.toString(dur) + "/400";
+				itM.setLore(Arrays.asList(newLore));
+				item.setItemMeta(itM);
+				if (dur == 0)
+					player.getInventory().remove(item);
+				
+				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 40, 2));
+				}
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER III")) {
+				if (action == Action.RIGHT_CLICK_AIR) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
+					player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60, 4));
+					}
+				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					Location fireLocs[] = new Location[] {
+							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
+							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
+							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
+							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
+							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
+							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+					};
+						
+					for (Location fireLoc : fireLocs ) {
+						if (fireLoc.getBlock().getType() == Material.AIR && fireLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+							fireLoc.getBlock().setType(Material.COBWEB);
+						}
+					}
+				}
+			}
+		}
+	}
 
 }
