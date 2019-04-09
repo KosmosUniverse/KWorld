@@ -20,5 +20,8 @@ public class AddRecipes {
 		main.getServer().addRecipe(new WindStick(main).getWindStickTierI());
 		main.getServer().addRecipe(new WindStick(main).getWindStickTierII());
 		main.getServer().addRecipe(new WindStick(main).getWindStickTierIII());
+		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierI());
+		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierII());
+		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierIII());
 	}
 }

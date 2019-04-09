@@ -35,6 +35,7 @@ public class InventoryRecipeListener implements Listener {
 		inv.setItem(0, new ItemStack(Material.EXPERIENCE_BOTTLE));
 		inv.setItem(1, new ItemBuilder(Material.STICK, "§cFIRE STICK", 1).getItem());
 		inv.setItem(2, new ItemBuilder(Material.STICK, "§bWIND STICK", 1).getItem());
+		inv.setItem(3, new ItemBuilder(Material.STICK, "§aEARTH STICK", 1).getItem());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -87,7 +88,6 @@ public class InventoryRecipeListener implements Listener {
 				break;
 			case EXPERIENCE_BOTTLE:
 				newInv = ExpBottle.getExpBottleRecipe();
-				
 				player.openInventory(newInv);
 				break;
 			case STICK:
@@ -97,6 +97,10 @@ public class InventoryRecipeListener implements Listener {
 				}
 				else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK")) {
 					newInv = WindStick.getWindStickRecipe();
+					player.openInventory(newInv);
+				}
+				else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK")) {
+					newInv = EarthStick.getEarthStickRecipe();
 					player.openInventory(newInv);
 				}
 				break;
@@ -133,7 +137,7 @@ public class InventoryRecipeListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (inv.getName().equals("§8Fire Stick")) {
+		if (inv.getName().equals("§8Fire Stick") || inv.getName().equals("§8Wind Stick") || inv.getName().equals("§8Earth Stick")) {
 			event.setCancelled(true);
 			if (item.getType() == Material.BARRIER)
 				player.closeInventory();

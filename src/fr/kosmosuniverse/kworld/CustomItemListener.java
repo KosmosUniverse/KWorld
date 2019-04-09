@@ -101,8 +101,8 @@ public class CustomItemListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (item.getItemMeta().getDisplayName().contains("§bWIND STICK TIER I")) {
-			if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER I") &&
+		if (item.getItemMeta().getDisplayName().contains("§aWIND STICK TIER I")) {
+			if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER I") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
 				ItemMeta itM = item.getItemMeta();
 				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
@@ -115,7 +115,7 @@ public class CustomItemListener implements Listener {
 						
 				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 1));
 				}
-			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER II") &&
+			else if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER II") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
 				ItemMeta itM = item.getItemMeta();
 				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
@@ -128,7 +128,7 @@ public class CustomItemListener implements Listener {
 				
 				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 40, 2));
 				}
-			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER III")) {
+			else if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER III")) {
 				if (action == Action.RIGHT_CLICK_AIR) {
 					ItemMeta itM = item.getItemMeta();
 					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
@@ -142,7 +142,7 @@ public class CustomItemListener implements Listener {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
-					Location fireLocs[] = new Location[] {
+					Location windLocs[] = new Location[] {
 							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
 							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
 							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
@@ -151,9 +151,78 @@ public class CustomItemListener implements Listener {
 							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
 					};
 						
-					for (Location fireLoc : fireLocs ) {
-						if (fireLoc.getBlock().getType() == Material.AIR && fireLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
-							fireLoc.getBlock().setType(Material.COBWEB);
+					for (Location windLoc : windLocs ) {
+						if (windLoc.getBlock().getType() == Material.AIR && windLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+							windLoc.getBlock().setType(Material.COBWEB);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	@EventHandler
+	public void onEarthStickClick(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		Action action = event.getAction();
+		ItemStack item = event.getItem();
+		
+		if (item == null)
+			return ;
+		
+		if (item.getItemMeta().getDisplayName().contains("§aEARTH STICK TIER I")) {
+			if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK TIER I") &&
+					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
+				ItemMeta itM = item.getItemMeta();
+				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+				int dur = Integer.parseInt(lore) - 1;
+				String newLore = "Durability:" + Integer.toString(dur) + "/200";
+				itM.setLore(Arrays.asList(newLore));
+				item.setItemMeta(itM);
+				if (dur == 0)
+					player.getInventory().remove(item);
+						
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
+				}
+			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK TIER II") &&
+					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
+				ItemMeta itM = item.getItemMeta();
+				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+				int dur = Integer.parseInt(lore) - 1;
+				String newLore = "Durability:" + Integer.toString(dur) + "/400";
+				itM.setLore(Arrays.asList(newLore));
+				item.setItemMeta(itM);
+				if (dur == 0)
+					player.getInventory().remove(item);
+				
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 40, 2));
+				}
+			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK TIER III")) {
+				if (action == Action.RIGHT_CLICK_AIR) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 60, 4));
+					}
+				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					Location earthLocs[] = new Location[] {
+							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
+							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
+							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
+							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
+							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
+							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+					};
+						
+					for (Location earthLoc : earthLocs ) {
+						if (earthLoc.getBlock().getType() == Material.AIR && earthLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+							earthLoc.getBlock().setType(Material.MAGMA_BLOCK);
 						}
 					}
 				}
