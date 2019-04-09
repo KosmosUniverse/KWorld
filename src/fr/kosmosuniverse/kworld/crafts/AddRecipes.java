@@ -17,5 +17,8 @@ public class AddRecipes {
 		main.getServer().addRecipe(new FireStick(main).getFireStickTierI());
 		main.getServer().addRecipe(new FireStick(main).getFireStickTierII());
 		main.getServer().addRecipe(new FireStick(main).getFireStickTierIII());
+		main.getServer().addRecipe(new WindStick(main).getWindStickTierI());
+		main.getServer().addRecipe(new WindStick(main).getWindStickTierII());
+		main.getServer().addRecipe(new WindStick(main).getWindStickTierIII());
 	}
 }

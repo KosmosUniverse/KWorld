@@ -33,7 +33,8 @@ public class InventoryRecipeListener implements Listener {
 		Inventory inv = Bukkit.createInventory(null, 27, "§8Craft");
 		
 		inv.setItem(0, new ItemStack(Material.EXPERIENCE_BOTTLE));
-		inv.setItem(1, new ItemStack(Material.STICK));
+		inv.setItem(1, new ItemBuilder(Material.STICK, "§cFIRE STICK", 1).getItem());
+		inv.setItem(2, new ItemBuilder(Material.STICK, "§bWIND STICK", 1).getItem());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -90,9 +91,14 @@ public class InventoryRecipeListener implements Listener {
 				player.openInventory(newInv);
 				break;
 			case STICK:
-				newInv = FireStick.getFireStickRecipe();
-				
-				player.openInventory(newInv);
+				if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK")) {
+					newInv = FireStick.getFireStickRecipe();
+					player.openInventory(newInv);
+				}
+				else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK")) {
+					newInv = WindStick.getWindStickRecipe();
+					player.openInventory(newInv);
+				}
 				break;
 			default:
 				break;
