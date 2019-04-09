@@ -23,5 +23,8 @@ public class AddRecipes {
 		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierI());
 		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierII());
 		main.getServer().addRecipe(new EarthStick(main).getEarthStickTierIII());
+		main.getServer().addRecipe(new WaterStick(main).getWaterStickTierI());
+		main.getServer().addRecipe(new WaterStick(main).getWaterStickTierII());
+		main.getServer().addRecipe(new WaterStick(main).getWaterStickTierIII());
 	}
 }

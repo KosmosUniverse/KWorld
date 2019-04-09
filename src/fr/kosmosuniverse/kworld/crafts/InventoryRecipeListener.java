@@ -103,6 +103,10 @@ public class InventoryRecipeListener implements Listener {
 					newInv = EarthStick.getEarthStickRecipe();
 					player.openInventory(newInv);
 				}
+				else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK")) {
+					newInv = WaterStick.getWaterStickRecipe();
+					player.openInventory(newInv);
+				}
 				break;
 			default:
 				break;
@@ -137,7 +141,8 @@ public class InventoryRecipeListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (inv.getName().equals("§8Fire Stick") || inv.getName().equals("§8Wind Stick") || inv.getName().equals("§8Earth Stick")) {
+		if (inv.getName().equals("§8Fire Stick") || inv.getName().equals("§8Wind Stick") ||
+				inv.getName().equals("§8Earth Stick") || inv.getName().equals("§8Water Stick")) {
 			event.setCancelled(true);
 			if (item.getType() == Material.BARRIER)
 				player.closeInventory();
