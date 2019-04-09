@@ -1,0 +1,12 @@
+general:
+  messages:
+    start: "Plugin turned ON"
+    end: "Plugin turned OFF"
+    join:
+    - "Player est dans la place !"
+    - "Player vient d'arriver !"
+    - "Et voila delui que nous attendions tous : Player"
+    quit:
+    - "Player est parti vers d'autres horizons !"
+    - "Player reviendra peut-être un jour !"
+    - "Il est parti, paix a son âme : Player"
