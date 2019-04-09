@@ -65,19 +65,22 @@ public class EarthStick {
 		switch (tier) {
 		case 1:
 			stickM.setDisplayName("§aEARTH STICK TIER I");
-			stickM.addEnchant(Enchantment.DAMAGE_ALL, 0, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 0, true);
+			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 0, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:200/200"));
 			break;
 		case 2:
 			stickM.setDisplayName("§aEARTH STICK TIER II");
-			stickM.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 3, true);
+			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 3, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:400/400"));
 			break;
 		case 3:
 			stickM.setDisplayName("§aEARTH STICK TIER III");
-			stickM.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 5, true);
+			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 5, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:600/600"));
 			break;

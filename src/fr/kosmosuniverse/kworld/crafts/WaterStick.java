@@ -65,19 +65,19 @@ public class WaterStick {
 		switch (tier) {
 		case 1:
 			stickM.setDisplayName("§1WATER STICK TIER I");
-			stickM.addEnchant(Enchantment.FROST_WALKER, 0, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ALL, 0, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:200/200"));
 			break;
 		case 2:
 			stickM.setDisplayName("§1WATER STICK TIER II");
-			stickM.addEnchant(Enchantment.FROST_WALKER, 3, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:400/400"));
 			break;
 		case 3:
 			stickM.setDisplayName("§1WATER STICK TIER III");
-			stickM.addEnchant(Enchantment.FROST_WALKER, 5, true);
+			stickM.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 			stickM.setLore(Arrays.asList("Durability:600/600"));
 			break;
