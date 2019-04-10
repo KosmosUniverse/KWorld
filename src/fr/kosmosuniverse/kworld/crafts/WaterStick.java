@@ -58,7 +58,7 @@ public class WaterStick {
 		return WaterStickTierIII;
 	}
 	
-	private static ItemStack WaterStickBuilder(int tier) {
+	public static ItemStack WaterStickBuilder(int tier) {
 		ItemStack stick = new ItemStack(Material.STICK);
 		ItemMeta stickM = stick.getItemMeta();
 		

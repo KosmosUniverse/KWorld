@@ -58,7 +58,7 @@ public class FireStick {
 		return FireStickTierIII;
 	}
 	
-	private static ItemStack FireStickBuilder(int tier) {
+	public static ItemStack FireStickBuilder(int tier) {
 		ItemStack stick = new ItemStack(Material.STICK);
 		ItemMeta stickM = stick.getItemMeta();
 		

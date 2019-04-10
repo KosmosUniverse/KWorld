@@ -3,7 +3,9 @@ package fr.kosmosuniverse.kworld;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.kosmosuniverse.kworld.commands.KGive;
 import fr.kosmosuniverse.kworld.commands.KGuide;
+import fr.kosmosuniverse.kworld.commands.KGuiveTab;
 import fr.kosmosuniverse.kworld.crafts.AddRecipes;
 import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
 
@@ -19,6 +21,8 @@ public class KWorldMain extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new CustomItemListener(/*this*/), this);
 		
 		getCommand("kguide").setExecutor(new KGuide(/*this*/));
+		getCommand("kgive").setExecutor(new KGive(/*this*/));
+		getCommand("kgive").setTabCompleter(new KGuiveTab());
 		
 		AddRecipes recipes = new AddRecipes(this);
 		recipes.addAll();

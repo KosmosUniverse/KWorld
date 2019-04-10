@@ -56,7 +56,7 @@ public class WindStick {
 		return WindStickTierIII;
 	}
 	
-	private static ItemStack WindStickBuilder(int tier) {
+	public static ItemStack WindStickBuilder(int tier) {
 		ItemStack stick = new ItemStack(Material.STICK);
 		ItemMeta stickM = stick.getItemMeta();
 		

@@ -7,3 +7,7 @@ api-version: 1.13
 commands:
   kguide:
     description: command to get the plugin guide
+  kgive:
+    description: command to get the plugin custom items
+    permission: kgive.use
+    usage: /kgive

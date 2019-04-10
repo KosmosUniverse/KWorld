@@ -58,7 +58,7 @@ public class EarthStick {
 		return EarthStickTierIII;
 	}
 	
-	private static ItemStack EarthStickBuilder(int tier) {
+	public static ItemStack EarthStickBuilder(int tier) {
 		ItemStack stick = new ItemStack(Material.STICK);
 		ItemMeta stickM = stick.getItemMeta();
 		
