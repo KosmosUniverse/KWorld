@@ -101,8 +101,8 @@ public class CustomItemListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (item.getItemMeta().getDisplayName().contains("§aWIND STICK TIER I")) {
-			if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER I") &&
+		if (item.getItemMeta().getDisplayName().contains("§bWIND STICK TIER I")) {
+			if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER I") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
 				ItemMeta itM = item.getItemMeta();
 				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
@@ -115,7 +115,7 @@ public class CustomItemListener implements Listener {
 						
 				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 1));
 				}
-			else if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER II") &&
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER II") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
 				ItemMeta itM = item.getItemMeta();
 				String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
@@ -128,7 +128,7 @@ public class CustomItemListener implements Listener {
 				
 				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 40, 2));
 				}
-			else if (item.getItemMeta().getDisplayName().equals("§aWIND STICK TIER III")) {
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER III")) {
 				if (action == Action.RIGHT_CLICK_AIR) {
 					ItemMeta itM = item.getItemMeta();
 					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
