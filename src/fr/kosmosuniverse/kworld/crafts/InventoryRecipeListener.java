@@ -11,6 +11,10 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.kosmosuniverse.kworld.ItemBuilder;
 //import fr.kosmosuniverse.kworld.KWorldMain;
+import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
+import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
+import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
+import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
 
 public class InventoryRecipeListener implements Listener {
 

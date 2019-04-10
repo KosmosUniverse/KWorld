@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.kosmosuniverse.kworld.crafts.EarthStick;
-import fr.kosmosuniverse.kworld.crafts.FireStick;
-import fr.kosmosuniverse.kworld.crafts.WaterStick;
-import fr.kosmosuniverse.kworld.crafts.WindStick;
+import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
+import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
+import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
+import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
 
 //import fr.kosmosuniverse.kworld.KWorldMain;
 

@@ -1,4 +1,4 @@
-package fr.kosmosuniverse.kworld.crafts;
+package fr.kosmosuniverse.kworld.crafts.stick;
 
 import java.util.Arrays;
 
