@@ -73,17 +73,31 @@ public class CustomItemListener implements Listener {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
 					Location fireLocs[] = new Location[] {
-							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
-							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
-							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
-							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
-							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
-							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+							event.getClickedBlock().getLocation().add(1, 1, 0), event.getClickedBlock().getLocation().add(2, 1, 0),
+							event.getClickedBlock().getLocation().add(-1, 1, 0), event.getClickedBlock().getLocation().add(-2, 1, 0),
+							event.getClickedBlock().getLocation().add(0, 1, -1), event.getClickedBlock().getLocation().add(0, 1, -2),
+							event.getClickedBlock().getLocation().add(0, 1, 1), event.getClickedBlock().getLocation().add(0, 1, 2),
+							event.getClickedBlock().getLocation().add(1, 1, 1), event.getClickedBlock().getLocation().add(1, 1, -1),
+							event.getClickedBlock().getLocation().add(-1, 1, 1), event.getClickedBlock().getLocation().add(-1, 1, -1),
+							event.getClickedBlock().getLocation().add(0, 1, 0)
 					};
 						
 					for (Location fireLoc : fireLocs ) {
-						if (fireLoc.getBlock().getType() == Material.AIR && fireLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+						if (fireLoc.getBlock().getType() == Material.AIR &&
+								fireLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR &&
+								!(fireLoc.getBlockX() == player.getLocation().getBlockX() &&
+								fireLoc.getBlockY() == player.getLocation().getBlockY() &&
+								fireLoc.getBlockZ() == player.getLocation().getBlockZ())) {
 							fireLoc.getBlock().setType(Material.FIRE);
 						}
 					}
@@ -142,17 +156,30 @@ public class CustomItemListener implements Listener {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
 					Location windLocs[] = new Location[] {
-							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
-							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
-							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
-							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
-							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
-							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+							event.getClickedBlock().getLocation().add(1, 1, 0), event.getClickedBlock().getLocation().add(2, 1, 0),
+							event.getClickedBlock().getLocation().add(-1, 1, 0), event.getClickedBlock().getLocation().add(-2, 1, 0),
+							event.getClickedBlock().getLocation().add(0, 1, -1), event.getClickedBlock().getLocation().add(0, 1, -2),
+							event.getClickedBlock().getLocation().add(0, 1, 1), event.getClickedBlock().getLocation().add(0, 1, 2),
+							event.getClickedBlock().getLocation().add(1, 1, 1), event.getClickedBlock().getLocation().add(1, 1, -1),
+							event.getClickedBlock().getLocation().add(-1, 1, 1), event.getClickedBlock().getLocation().add(-1, 1, -1),
+							event.getClickedBlock().getLocation().add(0, 1, 0)
 					};
 						
 					for (Location windLoc : windLocs ) {
-						if (windLoc.getBlock().getType() == Material.AIR && windLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+						if (windLoc.getBlock().getType() == Material.AIR && windLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR &&
+								!(windLoc.getBlockX() == player.getLocation().getBlockX() &&
+								windLoc.getBlockY() == player.getLocation().getBlockY() &&
+								windLoc.getBlockZ() == player.getLocation().getBlockZ())) {
 							windLoc.getBlock().setType(Material.COBWEB);
 						}
 					}
@@ -211,17 +238,30 @@ public class CustomItemListener implements Listener {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
 					Location earthLocs[] = new Location[] {
-							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
-							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
-							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
-							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
-							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
-							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+							event.getClickedBlock().getLocation().add(1, 1, 0), event.getClickedBlock().getLocation().add(2, 1, 0),
+							event.getClickedBlock().getLocation().add(-1, 1, 0), event.getClickedBlock().getLocation().add(-2, 1, 0),
+							event.getClickedBlock().getLocation().add(0, 1, -1), event.getClickedBlock().getLocation().add(0, 1, -2),
+							event.getClickedBlock().getLocation().add(0, 1, 1), event.getClickedBlock().getLocation().add(0, 1, 2),
+							event.getClickedBlock().getLocation().add(1, 1, 1), event.getClickedBlock().getLocation().add(1, 1, -1),
+							event.getClickedBlock().getLocation().add(-1, 1, 1), event.getClickedBlock().getLocation().add(-1, 1, -1),
+							event.getClickedBlock().getLocation().add(0, 1, 0)
 					};
 						
 					for (Location earthLoc : earthLocs ) {
-						if (earthLoc.getBlock().getType() == Material.AIR && earthLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+						if (earthLoc.getBlock().getType() == Material.AIR && earthLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR &&
+								!(earthLoc.getBlockX() == player.getLocation().getBlockX() &&
+								earthLoc.getBlockY() == player.getLocation().getBlockY() &&
+								earthLoc.getBlockZ() == player.getLocation().getBlockZ())) {
 							earthLoc.getBlock().setType(Material.MAGMA_BLOCK);
 						}
 					}
@@ -280,17 +320,30 @@ public class CustomItemListener implements Listener {
 					player.addPotionEffect(new PotionEffect(PotionEffectType.WATER_BREATHING, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
+					ItemMeta itM = item.getItemMeta();
+					String lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+					int dur = Integer.parseInt(lore) - 1;
+					String newLore = "Durability:" + Integer.toString(dur) + "/600";
+					itM.setLore(Arrays.asList(newLore));
+					item.setItemMeta(itM);
+					if (dur == 0)
+						player.getInventory().remove(item);
+					
 					Location waterLocs[] = new Location[] {
-							player.getLocation().add(1, 0, 0), player.getLocation().add(2, 0, 0),
-							player.getLocation().add(-1, 0, 0), player.getLocation().add(-2, 0, 0),
-							player.getLocation().add(0, 0, -1), player.getLocation().add(0, 0, -2),
-							player.getLocation().add(0, 0, 1), player.getLocation().add(0, 0, 2),
-							player.getLocation().add(1, 0, 1), player.getLocation().add(1, 0, -1),
-							player.getLocation().add(-1, 0, 1), player.getLocation().add(-1, 0, -1)
+							event.getClickedBlock().getLocation().add(1, 1, 0), event.getClickedBlock().getLocation().add(2, 1, 0),
+							event.getClickedBlock().getLocation().add(-1, 1, 0), event.getClickedBlock().getLocation().add(-2, 1, 0),
+							event.getClickedBlock().getLocation().add(0, 1, -1), event.getClickedBlock().getLocation().add(0, 1, -2),
+							event.getClickedBlock().getLocation().add(0, 1, 1), event.getClickedBlock().getLocation().add(0, 1, 2),
+							event.getClickedBlock().getLocation().add(1, 1, 1), event.getClickedBlock().getLocation().add(1, 1, -1),
+							event.getClickedBlock().getLocation().add(-1, 1, 1), event.getClickedBlock().getLocation().add(-1, 1, -1),
+							event.getClickedBlock().getLocation().add(0, 1, 0)
 					};
 						
 					for (Location waterLoc : waterLocs ) {
-						if (waterLoc.getBlock().getType() == Material.AIR && waterLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR) {
+						if (waterLoc.getBlock().getType() == Material.AIR && waterLoc.getBlock().getRelative(BlockFace.DOWN).getType() != Material.AIR &&
+								!(waterLoc.getBlockX() == player.getLocation().getBlockX() &&
+								waterLoc.getBlockY() == player.getLocation().getBlockY() &&
+								waterLoc.getBlockZ() == player.getLocation().getBlockZ())) {
 							waterLoc.getBlock().setType(Material.WATER);
 						}
 					}
