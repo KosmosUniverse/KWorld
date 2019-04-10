@@ -127,7 +127,7 @@ public class CustomItemListener implements Listener {
 				if (dur == 0)
 					player.getInventory().remove(item);
 						
-				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 1));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
 				}
 			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER II") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
@@ -140,7 +140,7 @@ public class CustomItemListener implements Listener {
 				if (dur == 0)
 					player.getInventory().remove(item);
 				
-				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 40, 2));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 40, 2));
 				}
 			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK TIER III")) {
 				if (action == Action.RIGHT_CLICK_AIR) {
@@ -153,7 +153,7 @@ public class CustomItemListener implements Listener {
 					if (dur == 0)
 						player.getInventory().remove(item);
 					
-					player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60, 4));
+					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
 					ItemMeta itM = item.getItemMeta();
@@ -209,7 +209,7 @@ public class CustomItemListener implements Listener {
 				if (dur == 0)
 					player.getInventory().remove(item);
 						
-				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 20, 1));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 20, 1));
 				}
 			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK TIER II") &&
 					(action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK)) {
@@ -222,7 +222,7 @@ public class CustomItemListener implements Listener {
 				if (dur == 0)
 					player.getInventory().remove(item);
 				
-				player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 40, 2));
+				player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 40, 2));
 				}
 			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK TIER III")) {
 				if (action == Action.RIGHT_CLICK_AIR) {
@@ -235,7 +235,7 @@ public class CustomItemListener implements Listener {
 					if (dur == 0)
 						player.getInventory().remove(item);
 					
-					player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20 * 60, 4));
+					player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE, 20 * 60, 4));
 					}
 				else if (action == Action.RIGHT_CLICK_BLOCK) {
 					ItemMeta itM = item.getItemMeta();

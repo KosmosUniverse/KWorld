@@ -19,6 +19,7 @@ public class KWorldMain extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new KWorldListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryRecipeListener(/*this*/), this);
 		getServer().getPluginManager().registerEvents(new CustomItemListener(/*this*/), this);
+		getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
 		
 		getCommand("kguide").setExecutor(new KGuide(/*this*/));
 		getCommand("kgive").setExecutor(new KGive(/*this*/));
