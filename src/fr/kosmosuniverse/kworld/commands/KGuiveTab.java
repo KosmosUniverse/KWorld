@@ -19,6 +19,7 @@ public class KGuiveTab implements TabCompleter {
 			
 			List<String> list = new ArrayList<String>();
 			
+			//Sticks
 			list.add("FireStickTierI");
 			list.add("FireStickTierII");
 			list.add("FireStickTierIII");
@@ -34,6 +35,13 @@ public class KGuiveTab implements TabCompleter {
 			list.add("WaterStickTierI");
 			list.add("WaterStickTierII");
 			list.add("WaterStickTierIII");
+			
+			//XP Storage
+			list.add("XpStorageTierI");
+			list.add("XpStorageTierII");
+			list.add("XpStorageTierIII");
+			list.add("XpStorageTierIV");
+			list.add("XpStorageTierV");
 			
 			return list;
 		}

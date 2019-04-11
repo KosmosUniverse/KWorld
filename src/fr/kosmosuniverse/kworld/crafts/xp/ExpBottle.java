@@ -1,4 +1,4 @@
-package fr.kosmosuniverse.kworld.crafts;
+package fr.kosmosuniverse.kworld.crafts.xp;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;

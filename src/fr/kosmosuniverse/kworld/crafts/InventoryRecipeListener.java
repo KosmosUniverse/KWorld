@@ -15,6 +15,8 @@ import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
+import fr.kosmosuniverse.kworld.crafts.xp.ExpBottle;
+import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
 
 public class InventoryRecipeListener implements Listener {
 
@@ -40,6 +42,7 @@ public class InventoryRecipeListener implements Listener {
 		inv.setItem(1, new ItemBuilder(Material.STICK, "§cFIRE STICK", 1).getItem());
 		inv.setItem(2, new ItemBuilder(Material.STICK, "§bWIND STICK", 1).getItem());
 		inv.setItem(3, new ItemBuilder(Material.STICK, "§aEARTH STICK", 1).getItem());
+		inv.setItem(4, XpStorage.xpStorageSampleBuilder());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -112,6 +115,9 @@ public class InventoryRecipeListener implements Listener {
 					player.openInventory(newInv);
 				}
 				break;
+			case EMERALD:
+				newInv = XpStorage.getXpStorageRecipe();
+				player.openInventory(newInv);
 			default:
 				break;
 			}
@@ -151,6 +157,35 @@ public class InventoryRecipeListener implements Listener {
 			if (item.getType() == Material.BARRIER)
 				player.closeInventory();
 			player.openInventory(getCraftsInventory());
+		}
+	}
+	
+	@EventHandler
+	public void onXpStorageCraftClick(InventoryClickEvent event) {
+		Inventory inv = event.getInventory();
+		Player player = (Player) event.getWhoClicked();
+		ItemStack item = event.getCurrentItem();
+		
+		if (item == null)
+			return ;
+		
+		if (inv.getName().equals("§8XP STORAGE 1")) {
+			event.setCancelled(true);
+			if (item.getType() == Material.BARRIER) {
+				player.closeInventory();
+				player.openInventory(getCraftsInventory());
+			}
+			else if (item.getType() == Material.LIME_STAINED_GLASS_PANE) {
+				player.closeInventory();
+				player.openInventory(XpStorage.getXpStorageRecipe2());
+			}
+		}
+		else if (inv.getName().equals("§8XP STORAGE 2")) {
+			event.setCancelled(true);
+			if (item.getType() == Material.BARRIER) {
+				player.closeInventory();
+				player.openInventory(XpStorage.getXpStorageRecipe());
+			}
 		}
 	}
 }

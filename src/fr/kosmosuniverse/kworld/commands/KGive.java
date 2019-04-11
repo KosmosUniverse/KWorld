@@ -11,6 +11,7 @@ import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
+import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
 
 //import fr.kosmosuniverse.kworld.KWorldMain;
 
@@ -92,6 +93,16 @@ public class KGive implements CommandExecutor {
 			return WaterStick.WaterStickBuilder(2);
 		case "WaterStickTierIII":
 			return WaterStick.WaterStickBuilder(3);
+		case "XpStorageTierI":
+			return XpStorage.xpStorageBuilder(1);
+		case "XpStorageTierII":
+			return XpStorage.xpStorageBuilder(2);
+		case "XpStorageTierIII":
+			return XpStorage.xpStorageBuilder(3);
+		case "XpStorageTierIV":
+			return XpStorage.xpStorageBuilder(4);
+		case "XpStorageTierV":
+			return XpStorage.xpStorageBuilder(5);
 		default:
 			return null;
 		}
