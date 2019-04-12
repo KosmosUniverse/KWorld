@@ -15,12 +15,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
+
 public class CustomItemListener implements Listener {
 
-	//private KWorldMain main;
+	private KWorldMain main;
 	
-	public CustomItemListener(/*KWorldMain main*/) {
-		//this.main = main;
+	public CustomItemListener(KWorldMain main) {
+		this.main = main;
 	}
 	
 	@EventHandler
@@ -349,6 +351,31 @@ public class CustomItemListener implements Listener {
 					}
 				}
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onXpStorageClickEvent(PlayerInteractEvent event) {
+		Player player = event.getPlayer();
+		ItemStack item = event.getItem();
+		Action action = event.getAction();
+		
+		if (item == null || !item.getItemMeta().getDisplayName().contains("§2XP STORAGE TIER"))
+			return ;
+		
+		XpStorage xp = new XpStorage(this.main);
+		if (action == Action.RIGHT_CLICK_AIR || action == Action.RIGHT_CLICK_BLOCK) {
+		
+			int currentStored = XpStorage.getXpStored(item);
+			int maxStorable = XpStorage.getMaxXpStorable(item);
+		
+			if (xp.storeXp(player, item, currentStored, maxStorable))
+				xp.reloadXpLevel(item);
+		}
+		else if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
+			int maxStorable = XpStorage.getMaxXpStorable(item);
+			
+			xp.giveBackXpLevels(player, item, maxStorable == 0);
 		}
 	}
 }

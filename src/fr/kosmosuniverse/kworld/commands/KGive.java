@@ -1,6 +1,5 @@
 package fr.kosmosuniverse.kworld.commands;
 
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -54,7 +53,7 @@ public class KGive implements CommandExecutor {
 				player.sendMessage("§3[KWolrd] : /kgive " + args[0] + " " + args[1] + " invalid number (0 < num < 65)");
 				return false;
 			}
-			player.getInventory().addItem(stickMultiplier(item, Integer.parseInt(args[1])));
+			player.getInventory().addItem(itemMultiplier(item, Integer.parseInt(args[1])));
 		}
 		return true;
 	}
@@ -108,8 +107,8 @@ public class KGive implements CommandExecutor {
 		}
 	}
 	
-	private ItemStack stickMultiplier(ItemStack item, int multi) {
-		ItemStack it = new ItemStack(Material.STICK, multi);
+	private ItemStack itemMultiplier(ItemStack item, int multi) {
+		ItemStack it = new ItemStack(item.getType(), multi);
 		
 		it.setItemMeta(item.getItemMeta());
 		item = it;

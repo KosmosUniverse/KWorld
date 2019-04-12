@@ -1,11 +1,13 @@
 package fr.kosmosuniverse.kworld.crafts.xp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -23,9 +25,51 @@ public class XpStorage {
 	private ShapedRecipe xpStorageTierIII;
 	private ShapedRecipe xpStorageTierIV;
 	private ShapedRecipe xpStorageTierV;
+	private ArrayList<Integer> xpAmounts = new ArrayList<>();
 	
 	public XpStorage(KWorldMain main) {
 		this.main = main;
+		
+		xpAmounts.add(7);
+		xpAmounts.add(16);
+		xpAmounts.add(27);
+		xpAmounts.add(40);
+		xpAmounts.add(55);
+		xpAmounts.add(72);
+		xpAmounts.add(91);
+		xpAmounts.add(112);
+		xpAmounts.add(135);
+		xpAmounts.add(160);
+		xpAmounts.add(187);
+		xpAmounts.add(216);
+		xpAmounts.add(247);
+		xpAmounts.add(280);
+		xpAmounts.add(315);
+		xpAmounts.add(352);
+		xpAmounts.add(394);
+		xpAmounts.add(441);
+		xpAmounts.add(493);
+		xpAmounts.add(550);
+		xpAmounts.add(612);
+		xpAmounts.add(679);
+		xpAmounts.add(751);
+		xpAmounts.add(828);
+		xpAmounts.add(910);
+		xpAmounts.add(997);
+		xpAmounts.add(1089);
+		xpAmounts.add(1186);
+		xpAmounts.add(1288);
+		xpAmounts.add(1395);
+		xpAmounts.add(1507);
+		xpAmounts.add(1628);
+		xpAmounts.add(1758);
+		xpAmounts.add(1897);
+		xpAmounts.add(2045);
+		xpAmounts.add(2202);
+		xpAmounts.add(2368);
+		xpAmounts.add(2543);
+		xpAmounts.add(2727);
+		xpAmounts.add(2920);
 		
 		xpStorageTierI = new ShapedRecipe(new NamespacedKey(this.main, "XpStorage1"), xpStorageBuilder(1));
 		xpStorageTierII = new ShapedRecipe(new NamespacedKey(this.main, "XpStorage2"), xpStorageBuilder(2));
@@ -196,4 +240,195 @@ public class XpStorage {
 		
 		return inv;
 	}
+	
+	public static int getXpStored(ItemStack item) {
+		ItemMeta itM = item.getItemMeta();
+		String lore;
+		
+		if (item.getItemMeta().getDisplayName().equals("§2XP STORAGE TIER V"))
+			lore = itM.getLore().get(0).split(":")[1];
+		else
+			lore = itM.getLore().get(0).split(":")[1].split("/")[0];
+		
+		return (Integer.parseInt(lore));
+	}
+	
+	public static int getMaxXpStorable(ItemStack item) {
+		if (item.getItemMeta().getDisplayName().equals("§2XP STORAGE TIER V"))
+			return 0;
+		ItemMeta itM = item.getItemMeta();
+		String lore = itM.getLore().get(0).split(":")[1].split("/")[1];
+		
+		
+		return (Integer.parseInt(lore));
+	}
+	
+	public boolean storeXp(Player player, ItemStack item, int currentStored, int maxStorable) {
+		if (getPlayerExp(player) == 0) {
+			player.sendMessage("§3[KWorld] : §rYou don't have any xp to store");
+			return false;
+		}
+		
+		int playerxp = getPlayerExp(player);
+		if (maxStorable == 0) {
+			player.setExp(0);
+			player.setLevel(0);
+			addXp(item, playerxp, true);
+			return false;
+		}
+		if (currentStored == maxStorable) {
+			player.sendMessage("§3[KWorld] : §rThis XP STORAGE already contains max XP possible");
+			return false;
+		}
+		
+		int xpStorable = maxStorable - currentStored;
+		int xpDiff = playerxp - xpStorable;
+		
+		if (xpDiff <= 0) {
+			player.setExp(0);
+			player.setLevel(0);
+			addXp(item, playerxp, false);
+		}
+		else if (xpDiff > 0) {
+			int level = 0;
+			for (Integer it : xpAmounts) {
+				if (xpDiff < it)
+					break ;
+				level++;
+			}
+			player.setLevel(level);
+			float expRest;
+			
+			if (level == 0)
+				expRest = xpDiff / xpAmounts.get(level);
+			else
+				expRest = (xpDiff - xpAmounts.get(level - 1)) / xpAmounts.get(level);
+			player.setExp((float) Math.round(expRest * 10f) / 10f);
+			addXp(item, xpStorable, false);
+		}
+
+		return true;
+	}
+	
+	public static void addXp(ItemStack item, int xpAmount, boolean infinite) {
+		ItemMeta itM = item.getItemMeta();
+		String preLoreXp = itM.getLore().get(0).split(":")[0];
+		int currentXp;
+		String MaxXp;
+		int newCurrent;
+		String newLore;
+		
+		if (infinite) {
+			currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1]);
+			newCurrent = currentXp + xpAmount;
+			newLore = preLoreXp + ":" + Integer.toString(newCurrent);
+		}
+		else {
+			currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1].split("/")[0]);
+			MaxXp = itM.getLore().get(0).split(":")[1].split("/")[1];
+			newCurrent = currentXp + xpAmount;
+			newLore = preLoreXp + ":" + Integer.toString(newCurrent) + "/" + MaxXp; 
+		}
+		
+		itM.setLore(Arrays.asList(newLore, itM.getLore().get(1)));
+		
+		item.setItemMeta(itM);
+	}
+	
+	public static void removeXp(ItemStack item, boolean infinite) {
+		ItemMeta itM = item.getItemMeta();
+		String preLoreXp = itM.getLore().get(0).split(":")[0];
+		String preLoreLevel = itM.getLore().get(1).split(":")[0];
+		String newLoreXp;
+		String newLoreLevel;
+		
+		if (infinite) {
+			newLoreXp = preLoreXp + ":0";
+			newLoreLevel = preLoreLevel + ":0";
+		}
+		else {
+			String MaxXp = itM.getLore().get(0).split(":")[1].split("/")[1];
+			String MaxLevel = itM.getLore().get(1).split(":")[1].split("/")[1];
+			newLoreXp = preLoreXp + ":0/" + MaxXp; 
+			newLoreLevel = preLoreLevel + ":0/" + MaxLevel; 
+		}
+		
+		itM.setLore(Arrays.asList(newLoreXp, newLoreLevel));
+		
+		item.setItemMeta(itM);
+	}
+	
+	public void reloadXpLevel(ItemStack item) {		
+		ItemMeta itM = item.getItemMeta();
+		String preLoreXp = itM.getLore().get(1).split(":")[0];
+		int currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1].split("/")[0]);
+		String MaxLevel = itM.getLore().get(1).split(":")[1].split("/")[1];
+		
+		if (currentXp < 7)
+			return ;
+		
+		int level = 0;
+		
+		for (Integer it : xpAmounts) {
+			if (currentXp < it)
+				break ;
+			level++;
+		}
+		
+		String newLore = preLoreXp + ":" + level + "/" + MaxLevel;
+		
+		itM.setLore(Arrays.asList(itM.getLore().get(0), newLore));
+		
+		item.setItemMeta(itM);
+	}
+	
+	public void giveBackXpLevels(Player player, ItemStack item, boolean infinite) {
+		int currentStoredXp = getXpStored(item);
+		int playerXp = getPlayerExp(player);
+		
+		int totalXp = currentStoredXp + playerXp;
+		
+		player.setExp(0);
+		player.setLevel(0);
+		
+		player.giveExp(totalXp);
+		
+		removeXp(item, infinite);
+	}
+	
+	// Calculate amount of EXP needed to level up
+    public static int getExpToLevelUp(int level){
+        if(level <= 15){
+            return 2*level+7;
+        } else if(level <= 30){
+            return 5*level-38;
+        } else {
+            return 9*level-158;
+        }
+    }
+  
+    // Calculate total experience up to a level
+    public static int getExpAtLevel(int level){
+        if(level <= 16){
+            return (int) (Math.pow(level,2) + 6*level);
+        } else if(level <= 31){
+            return (int) (2.5*Math.pow(level,2) - 40.5*level + 360.0);
+        } else {
+            return (int) (4.5*Math.pow(level,2) - 162.5*level + 2220.0);
+        }
+    }
+  
+    // Calculate player's current EXP amount
+    public static int getPlayerExp(Player player){
+        int exp = 0;
+        int level = player.getLevel();
+      
+        // Get the amount of XP in past levels
+        exp += getExpAtLevel(level);
+      
+        // Get amount of XP towards next level
+        exp += Math.round(getExpToLevelUp(level) * player.getExp());
+      
+        return exp;
+    }
 }
