@@ -8,6 +8,7 @@ import fr.kosmosuniverse.kworld.commands.KGuide;
 import fr.kosmosuniverse.kworld.commands.KGuiveTab;
 import fr.kosmosuniverse.kworld.crafts.AddRecipes;
 import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
+import fr.kosmosuniverse.kworld.crafts.XpStorageListener;
 
 public class KWorldMain extends JavaPlugin {
 	@Override
@@ -20,6 +21,7 @@ public class KWorldMain extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new InventoryRecipeListener(/*this*/), this);
 		getServer().getPluginManager().registerEvents(new CustomItemListener(this), this);
 		getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
+		getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);
 		
 		getCommand("kguide").setExecutor(new KGuide(/*this*/));
 		getCommand("kgive").setExecutor(new KGive(/*this*/));

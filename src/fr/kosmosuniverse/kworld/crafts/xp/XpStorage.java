@@ -297,12 +297,28 @@ public class XpStorage {
 				level++;
 			}
 			player.setLevel(level);
+			float expLevel;
+			float expNext;
 			float expRest;
 			
 			if (level == 0)
 				expRest = xpDiff / xpAmounts.get(level);
 			else
-				expRest = (xpDiff - xpAmounts.get(level - 1)) / xpAmounts.get(level);
+				if (level < 17) {
+					expLevel = (float) Math.pow(level, 2) - (6.0f * level);
+					expNext = (float) Math.pow(level + 1, 2) - (6.0f * (level + 1));
+					expRest = (xpDiff - expLevel) / expNext;
+				}
+				else if (level < 32) {
+					expLevel = (2.5f * (float) Math.pow(level, 2)) - (40.5f * level) + 360.0f;
+					expNext =  (2.5f * (float) Math.pow(level + 1, 2)) - (40.5f * (level + 1)) + 360.0f;
+					expRest = (xpDiff - expLevel) / expNext;
+				}
+				else {
+					expLevel = (4.5f * (float) Math.pow(level, 2)) - (162.5f * level) + 2220.0f;
+					expNext =  (4.5f * (float) Math.pow(level + 1, 2)) - (162.5f * (level + 1)) + 2220.0f;
+					expRest = (xpDiff - expLevel) / expNext;
+				}
 			player.setExp((float) Math.round(expRest * 10f) / 10f);
 			addXp(item, xpStorable, false);
 		}
