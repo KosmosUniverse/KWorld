@@ -85,6 +85,19 @@ public class WindStick {
 		
 		return stick;
 	}
+	
+	public static ItemStack WindStickSampleBuilder() {
+		ItemStack stick = new ItemStack(Material.STICK);
+		ItemMeta stickM = stick.getItemMeta();
+		
+		stickM.setDisplayName("§bWIND STICK");
+		stickM.addEnchant(Enchantment.KNOCKBACK, 5, true);
+		stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		stick.setItemMeta(stickM);
+		
+		return stick;
+	}
 
 	public static Inventory getWindStickRecipe() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8Fire Stick");

@@ -91,6 +91,20 @@ public class EarthStick {
 		return stick;
 	}
 	
+	public static ItemStack EarthStickSampleBuilder() {
+		ItemStack stick = new ItemStack(Material.STICK);
+		ItemMeta stickM = stick.getItemMeta();
+		
+		stickM.setDisplayName("§aEARTH STICK");
+		stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 5, true);
+		stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 5, true);
+		stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		stick.setItemMeta(stickM);
+		
+		return stick;
+	}
+	
 	public static Inventory getEarthStickRecipe() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8Earth Stick");
 		

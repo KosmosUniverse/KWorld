@@ -10,7 +10,7 @@ import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 
-import fr.kosmosuniverse.kworld.KWorldMain;
+//import fr.kosmosuniverse.kworld.KWorldMain;
 import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
 
 public class XpStorageListener implements Listener {

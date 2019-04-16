@@ -88,6 +88,19 @@ public class FireStick {
 		return stick;
 	}
 	
+	public static ItemStack FireStickSampleBuilder() {
+		ItemStack stick = new ItemStack(Material.STICK);
+		ItemMeta stickM = stick.getItemMeta();
+		
+		stickM.setDisplayName("§cFIRE STICK");
+		stickM.addEnchant(Enchantment.FIRE_ASPECT, 5, true);
+		stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		stick.setItemMeta(stickM);
+		
+		return stick;
+	}
+	
 	public static Inventory getFireStickRecipe() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8Fire Stick");
 		

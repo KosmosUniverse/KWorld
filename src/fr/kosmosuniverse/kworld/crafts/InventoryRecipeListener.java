@@ -39,10 +39,10 @@ public class InventoryRecipeListener implements Listener {
 		Inventory inv = Bukkit.createInventory(null, 27, "§8Craft");
 		
 		inv.setItem(0, new ItemStack(Material.EXPERIENCE_BOTTLE));
-		inv.setItem(1, new ItemBuilder(Material.STICK, "§cFIRE STICK", 1).getItem());
-		inv.setItem(2, new ItemBuilder(Material.STICK, "§bWIND STICK", 1).getItem());
-		inv.setItem(3, new ItemBuilder(Material.STICK, "§aEARTH STICK", 1).getItem());
-		inv.setItem(4, new ItemBuilder(Material.STICK, "§1WATER STICK", 1).getItem());
+		inv.setItem(1, FireStick.FireStickSampleBuilder());
+		inv.setItem(2, WindStick.WindStickSampleBuilder());
+		inv.setItem(3, EarthStick.EarthStickSampleBuilder());
+		inv.setItem(4, WaterStick.WaterStickSampleBuilder());
 		inv.setItem(5, XpStorage.xpStorageSampleBuilder());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		

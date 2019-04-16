@@ -88,6 +88,19 @@ public class WaterStick {
 		return stick;
 	}
 	
+	public static ItemStack WaterStickSampleBuilder() {
+		ItemStack stick = new ItemStack(Material.STICK);
+		ItemMeta stickM = stick.getItemMeta();
+		
+		stickM.setDisplayName("§1WATER STICK");
+		stickM.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+		stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		
+		stick.setItemMeta(stickM);
+		
+		return stick;
+	}
+	
 	public static Inventory getWaterStickRecipe() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8Water Stick");
 		
