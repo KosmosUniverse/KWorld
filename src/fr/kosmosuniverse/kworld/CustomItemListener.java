@@ -369,8 +369,8 @@ public class CustomItemListener implements Listener {
 			int currentStored = XpStorage.getXpStored(item);
 			int maxStorable = XpStorage.getMaxXpStorable(item);
 		
-			if (xp.storeXp(player, item, currentStored, maxStorable))
-				xp.reloadXpLevel(item);
+			xp.storeXp(player, item, currentStored, maxStorable);
+			xp.reloadXpLevel(item, maxStorable == 0);
 		}
 		else if (action == Action.LEFT_CLICK_AIR || action == Action.LEFT_CLICK_BLOCK) {
 			int maxStorable = XpStorage.getMaxXpStorable(item);

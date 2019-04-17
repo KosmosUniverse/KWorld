@@ -1,6 +1,5 @@
 package fr.kosmosuniverse.kworld.crafts.xp;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
@@ -25,51 +24,9 @@ public class XpStorage {
 	private ShapedRecipe xpStorageTierIII;
 	private ShapedRecipe xpStorageTierIV;
 	private ShapedRecipe xpStorageTierV;
-	private ArrayList<Integer> xpAmounts = new ArrayList<>();
 	
 	public XpStorage(KWorldMain main) {
 		this.main = main;
-		
-		xpAmounts.add(7);
-		xpAmounts.add(16);
-		xpAmounts.add(27);
-		xpAmounts.add(40);
-		xpAmounts.add(55);
-		xpAmounts.add(72);
-		xpAmounts.add(91);
-		xpAmounts.add(112);
-		xpAmounts.add(135);
-		xpAmounts.add(160);
-		xpAmounts.add(187);
-		xpAmounts.add(216);
-		xpAmounts.add(247);
-		xpAmounts.add(280);
-		xpAmounts.add(315);
-		xpAmounts.add(352);
-		xpAmounts.add(394);
-		xpAmounts.add(441);
-		xpAmounts.add(493);
-		xpAmounts.add(550);
-		xpAmounts.add(612);
-		xpAmounts.add(679);
-		xpAmounts.add(751);
-		xpAmounts.add(828);
-		xpAmounts.add(910);
-		xpAmounts.add(997);
-		xpAmounts.add(1089);
-		xpAmounts.add(1186);
-		xpAmounts.add(1288);
-		xpAmounts.add(1395);
-		xpAmounts.add(1507);
-		xpAmounts.add(1628);
-		xpAmounts.add(1758);
-		xpAmounts.add(1897);
-		xpAmounts.add(2045);
-		xpAmounts.add(2202);
-		xpAmounts.add(2368);
-		xpAmounts.add(2543);
-		xpAmounts.add(2727);
-		xpAmounts.add(2920);
 		
 		xpStorageTierI = new ShapedRecipe(new NamespacedKey(this.main, "XpStorage1"), xpStorageBuilder(1));
 		xpStorageTierII = new ShapedRecipe(new NamespacedKey(this.main, "XpStorage2"), xpStorageBuilder(2));
@@ -263,10 +220,10 @@ public class XpStorage {
 		return (Integer.parseInt(lore));
 	}
 	
-	public boolean storeXp(Player player, ItemStack item, int currentStored, int maxStorable) {
+	public void storeXp(Player player, ItemStack item, int currentStored, int maxStorable) {
 		if (getPlayerExp(player) == 0) {
 			player.sendMessage("§3[KWorld] : §rYou don't have any xp to store");
-			return false;
+			return ;
 		}
 		
 		int playerxp = getPlayerExp(player);
@@ -274,11 +231,11 @@ public class XpStorage {
 			player.setExp(0);
 			player.setLevel(0);
 			addXp(item, playerxp, true);
-			return false;
+			return ;
 		}
 		if (currentStored == maxStorable) {
 			player.sendMessage("§3[KWorld] : §rThis XP STORAGE already contains max XP possible");
-			return false;
+			return ;
 		}
 		
 		int xpStorable = maxStorable - currentStored;
@@ -291,39 +248,30 @@ public class XpStorage {
 		}
 		else if (xpDiff > 0) {
 			int level = 0;
-			for (Integer it : xpAmounts) {
-				if (xpDiff < it)
+			for (; ; level++) {
+				if (xpDiff < getExpAtLevel(level))
 					break ;
 				level++;
 			}
-			player.setLevel(level);
+			player.setLevel(level - 1);
+
 			float expLevel;
 			float expNext;
 			float expRest;
 			
 			if (level == 0)
-				expRest = xpDiff / xpAmounts.get(level);
-			else
-				if (level < 17) {
-					expLevel = (float) Math.pow(level, 2) - (6.0f * level);
-					expNext = (float) Math.pow(level + 1, 2) - (6.0f * (level + 1));
-					expRest = (xpDiff - expLevel) / expNext;
-				}
-				else if (level < 32) {
-					expLevel = (2.5f * (float) Math.pow(level, 2)) - (40.5f * level) + 360.0f;
-					expNext =  (2.5f * (float) Math.pow(level + 1, 2)) - (40.5f * (level + 1)) + 360.0f;
-					expRest = (xpDiff - expLevel) / expNext;
-				}
-				else {
-					expLevel = (4.5f * (float) Math.pow(level, 2)) - (162.5f * level) + 2220.0f;
-					expNext =  (4.5f * (float) Math.pow(level + 1, 2)) - (162.5f * (level + 1)) + 2220.0f;
-					expRest = (xpDiff - expLevel) / expNext;
-				}
+				expRest = xpDiff / getExpAtLevel(1);
+			else {
+				expLevel = getExpAtLevel(level - 1);
+				expNext = getExpAtLevel(level - 1);
+				expRest = (xpDiff - expLevel) / expNext;
+				addXp(item, xpStorable, false);
+			}
+
 			player.setExp((float) Math.round(expRest * 10f) / 10f);
-			addXp(item, xpStorable, false);
 		}
 
-		return true;
+		return ;
 	}
 	
 	public static void addXp(ItemStack item, int xpAmount, boolean infinite) {
@@ -374,24 +322,39 @@ public class XpStorage {
 		item.setItemMeta(itM);
 	}
 	
-	public void reloadXpLevel(ItemStack item) {		
+	public void reloadXpLevel(ItemStack item, boolean infinite) {		
 		ItemMeta itM = item.getItemMeta();
-		String preLoreXp = itM.getLore().get(1).split(":")[0];
-		int currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1].split("/")[0]);
-		String MaxLevel = itM.getLore().get(1).split(":")[1].split("/")[1];
+		String preLoreLevel = itM.getLore().get(1).split(":")[0];
+		int currentXp;
+		String MaxLevel;
+		
+		if (infinite) {
+			currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1]);
+			MaxLevel = "";
+		}
+		else {
+			currentXp = Integer.parseInt(itM.getLore().get(0).split(":")[1].split("/")[0]);
+			MaxLevel = itM.getLore().get(1).split(":")[1].split("/")[1];
+		}
 		
 		if (currentXp < 7)
 			return ;
 		
 		int level = 0;
 		
-		for (Integer it : xpAmounts) {
-			if (currentXp < it)
+		for (; ; level++) {
+			if (currentXp < getExpAtLevel(level))
 				break ;
-			level++;
 		}
 		
-		String newLore = preLoreXp + ":" + level + "/" + MaxLevel;
+		String newLore;
+		
+		if (infinite) {
+			newLore = preLoreLevel + ":" + (level - 1);
+		}
+		else {
+			newLore = preLoreLevel + ":" + (level - 1) + "/" + MaxLevel;
+		}
 		
 		itM.setLore(Arrays.asList(itM.getLore().get(0), newLore));
 		
@@ -400,6 +363,8 @@ public class XpStorage {
 	
 	public void giveBackXpLevels(Player player, ItemStack item, boolean infinite) {
 		int currentStoredXp = getXpStored(item);
+		if (currentStoredXp == 0)
+			return ;
 		int playerXp = getPlayerExp(player);
 		
 		int totalXp = currentStoredXp + playerXp;
