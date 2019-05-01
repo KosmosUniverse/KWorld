@@ -3,6 +3,7 @@ package fr.kosmosuniverse.kworld;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.kosmosuniverse.kworld.MultiBlocks.MultiBlockListener;
 import fr.kosmosuniverse.kworld.commands.KGive;
 import fr.kosmosuniverse.kworld.commands.KGuide;
 import fr.kosmosuniverse.kworld.commands.KGuiveTab;
@@ -22,6 +23,7 @@ public class KWorldMain extends JavaPlugin {
 		getServer().getPluginManager().registerEvents(new CustomItemListener(this), this);
 		getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
 		getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);
+		getServer().getPluginManager().registerEvents(new MultiBlockListener(this), this);
 		
 		getCommand("kguide").setExecutor(new KGuide(/*this*/));
 		getCommand("kgive").setExecutor(new KGive(/*this*/));
