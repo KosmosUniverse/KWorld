@@ -8,6 +8,14 @@ public class ItemBuilder {
 	
 	private ItemStack it;
 	
+	public ItemBuilder(Material m, String name) {
+		it = new ItemStack(m);
+		ItemMeta itM = it.getItemMeta();
+		
+		itM.setDisplayName(name);
+		it.setItemMeta(itM);
+	}
+	
 	public ItemBuilder(Material m, String name, Integer nb) {
 		it = new ItemStack(m, nb);
 		ItemMeta itM = it.getItemMeta();

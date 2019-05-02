@@ -10,6 +10,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import fr.kosmosuniverse.kworld.ItemBuilder;
+import fr.kosmosuniverse.kworld.MultiBlocks.Decomposer;
 //import fr.kosmosuniverse.kworld.KWorldMain;
 import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
@@ -29,8 +30,9 @@ public class InventoryRecipeListener implements Listener {
 	public static Inventory getGuideInventory() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8Guide");
 		
-		inv.setItem(20, new ItemBuilder(Material.CRAFTING_TABLE, "§eWORKBENCH RECIPES", 1).getItem());
-		inv.setItem(21, new ItemBuilder(Material.FURNACE, "§eFURNACE RECIPES", 1).getItem());
+		inv.setItem(20, new ItemBuilder(Material.CRAFTING_TABLE, "§eWORKBENCH RECIPES").getItem());
+		inv.setItem(21, new ItemBuilder(Material.FURNACE, "§eFURNACE RECIPES").getItem());
+		inv.setItem(22, new ItemBuilder(Material.CHEST, "§eMultiBlocks").getItem());
 		
 		return inv;
 	}
@@ -44,6 +46,15 @@ public class InventoryRecipeListener implements Listener {
 		inv.setItem(3, EarthStick.EarthStickSampleBuilder());
 		inv.setItem(4, WaterStick.WaterStickSampleBuilder());
 		inv.setItem(5, XpStorage.xpStorageSampleBuilder());
+		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
+		
+		return inv;
+	}
+	
+	public static Inventory getMultiBlockInventory() {
+		Inventory inv = Bukkit.createInventory(null, 27, "§8MultiBlocks");
+		
+		inv.setItem(0, new ItemBuilder(Material.CHISELED_STONE_BRICKS, "Decomposer").getItem());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -69,6 +80,9 @@ public class InventoryRecipeListener implements Listener {
 			case FURNACE:
 				player.sendMessage("Yo furnace mamène");
 				break;
+			case CHEST:
+				player.openInventory(getMultiBlockInventory());
+				break;
 			default:
 				break;
 			}
@@ -87,7 +101,7 @@ public class InventoryRecipeListener implements Listener {
 		if (inv.getName().equals("§8Craft")) {
 			event.setCancelled(true);
 			
-			Inventory newInv;
+			Inventory newInv = null;
 			
 			switch (item.getType()) {
 			case BARRIER:
@@ -99,22 +113,15 @@ public class InventoryRecipeListener implements Listener {
 				player.openInventory(newInv);
 				break;
 			case STICK:
-				if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK")) {
+				if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK"))
 					newInv = FireStick.getFireStickRecipe();
-					player.openInventory(newInv);
-				}
-				else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK")) {
+				else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK"))
 					newInv = WindStick.getWindStickRecipe();
-					player.openInventory(newInv);
-				}
-				else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK")) {
+				else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK"))
 					newInv = EarthStick.getEarthStickRecipe();
-					player.openInventory(newInv);
-				}
-				else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK")) {
+				else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK"))
 					newInv = WaterStick.getWaterStickRecipe();
-					player.openInventory(newInv);
-				}
+				player.openInventory(newInv);
 				break;
 			case EMERALD:
 				newInv = XpStorage.getXpStorageRecipe();
@@ -123,6 +130,39 @@ public class InventoryRecipeListener implements Listener {
 				break;
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onMultiBlockClick(InventoryClickEvent event) {
+		Inventory inv = event.getInventory();
+		Player player = (Player) event.getWhoClicked();
+		ItemStack item = event.getCurrentItem();
+		
+		if (item == null)
+			return ;
+		
+		if (inv.getName().equals("§8MultiBlocks")) {
+			event.setCancelled(true);
+			switch (item.getType()) {
+			case BARRIER:
+				player.openInventory(getGuideInventory());
+				break ;
+			case CHISELED_STONE_BRICKS:
+				player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
+				break ;
+			default:
+				break ;
+			}
+			return ;
+		}
+		
+		else if (!inv.getName().contains("§8[MultiBlock]"))
+			return ;
+		
+		event.setCancelled(true);
+		
+		if (inv.getName().contains("Decomposer"))
+			player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
 	}
 	
 	@EventHandler
