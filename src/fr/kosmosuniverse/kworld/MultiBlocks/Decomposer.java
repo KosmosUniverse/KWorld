@@ -15,16 +15,53 @@ public class Decomposer extends IMultiBlock{
 	public Decomposer() {
 		this.name = "Decomposer";
 		this.multiblock = new MultiBlock(Material.CHISELED_STONE_BRICKS,
-				new Pattern(Material.STONE, -1, -1, -1),
-				new Pattern(Material.STONE, -1, -1, 0),
-				new Pattern(Material.STONE, -1, -1, 1),
-				new Pattern(Material.STONE, 0, -1, -1),
-				new Pattern(Material.STONE, 0, -1, 1),
-				new Pattern(Material.STONE, 1, -1, -1),
-				new Pattern(Material.STONE, 1, -1, 0),
-				new Pattern(Material.STONE, 1, -1, 1),
+				new Pattern(Material.STONE_BRICKS, -1, -1, -1),
+				new Pattern(Material.STONE_BRICKS, -1, -1, 0),
+				new Pattern(Material.STONE_BRICKS, -1, -1, 1),
+				new Pattern(Material.STONE_BRICKS, 0, -1, -1),
+				new Pattern(Material.STONE_BRICKS, 0, -1, 1),
+				new Pattern(Material.STONE_BRICKS, 1, -1, -1),
+				new Pattern(Material.STONE_BRICKS, 1, -1, 0),
+				new Pattern(Material.STONE_BRICKS, 1, -1, 1),
 				
-				new Pattern(Material.CHEST, 0, 1, 0));
+				new Pattern(Material.DARK_OAK_LOG, -2, 0, -2),
+				new Pattern(Material.DARK_OAK_LOG, -2, 0, 2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 0, -2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 0, 2),
+				
+				new Pattern(Material.CHEST, 0, 1, 0),
+				new Pattern(Material.DARK_OAK_LOG, -2, 1, -2),
+				new Pattern(Material.DARK_OAK_LOG, -2, 1, 2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 1, -2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 1, 2),
+				
+				new Pattern(Material.DARK_OAK_LOG, -2, 2, -2),
+				new Pattern(Material.DARK_OAK_LOG, -2, 2, 2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 2, -2),
+				new Pattern(Material.DARK_OAK_LOG, 2, 2, 2),
+				new Pattern(Material.IRON_BARS, 0, 2, 0),
+				
+				new Pattern(Material.DARK_OAK_WOOD, -2, 3, -2),
+				new Pattern(Material.DARK_OAK_WOOD, -2, 3, 2),
+				new Pattern(Material.DARK_OAK_WOOD, 2, 3, -2),
+				new Pattern(Material.DARK_OAK_WOOD, 2, 3, 2),
+				new Pattern(Material.DARK_OAK_LOG, 1, 3, -2),
+				new Pattern(Material.DARK_OAK_LOG, 0, 3, 2),
+				new Pattern(Material.DARK_OAK_LOG, -1, 3, -2),
+				new Pattern(Material.DARK_OAK_LOG, -1, 3, 2),
+				new Pattern(Material.DARK_OAK_LOG, 0, 3, -2),
+				new Pattern(Material.DARK_OAK_LOG, 1, 3, 2),
+				new Pattern(Material.DARK_OAK_LOG, -2, 3, -1),
+				new Pattern(Material.DARK_OAK_LOG, -2, 3, 0),
+				new Pattern(Material.DARK_OAK_LOG, -2, 3, 1),
+				new Pattern(Material.DARK_OAK_LOG, 2, 3, -1),
+				new Pattern(Material.DARK_OAK_LOG, 2, 3, 0),
+				new Pattern(Material.DARK_OAK_LOG, 2, 3, 1),
+				new Pattern(Material.IRON_BARS, -1, 3, 0),
+				new Pattern(Material.IRON_BARS, 0, 3, -1),
+				new Pattern(Material.IRON_BARS, 0, 3, 0),
+				new Pattern(Material.IRON_BARS, 1, 3, 0),
+				new Pattern(Material.IRON_BARS, 0, 3, 1));
 	}
 	
 	@Override

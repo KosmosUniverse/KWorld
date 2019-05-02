@@ -8,15 +8,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-public class KGuiveTab implements TabCompleter {
+public class KGiveTab implements TabCompleter {
 
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("kgive")) {
 			if (!(sender instanceof Player))
 				return null;
-			//Player player = (Player) sender;
-			
+
 			List<String> list = new ArrayList<String>();
 			
 			//Sticks
