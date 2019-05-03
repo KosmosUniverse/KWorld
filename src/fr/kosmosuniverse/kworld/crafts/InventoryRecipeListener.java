@@ -98,37 +98,37 @@ public class InventoryRecipeListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (inv.getName().equals("§8Craft")) {
-			event.setCancelled(true);
-			
-			Inventory newInv = null;
-			
-			switch (item.getType()) {
-			case BARRIER:
-				player.closeInventory();
-				player.openInventory(getGuideInventory());
-				break;
-			case EXPERIENCE_BOTTLE:
-				newInv = ExpBottle.getExpBottleRecipe();
-				player.openInventory(newInv);
-				break;
-			case STICK:
-				if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK"))
-					newInv = FireStick.getFireStickRecipe();
-				else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK"))
-					newInv = WindStick.getWindStickRecipe();
-				else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK"))
-					newInv = EarthStick.getEarthStickRecipe();
-				else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK"))
-					newInv = WaterStick.getWaterStickRecipe();
-				player.openInventory(newInv);
-				break;
-			case EMERALD:
-				newInv = XpStorage.getXpStorageRecipe();
-				player.openInventory(newInv);
-			default:
-				break;
-			}
+		if (!inv.getName().equals("§8Craft"))
+			return ;
+		event.setCancelled(true);
+		
+		Inventory newInv = null;
+		
+		switch (item.getType()) {
+		case BARRIER:
+			player.closeInventory();
+			player.openInventory(getGuideInventory());
+			break;
+		case EXPERIENCE_BOTTLE:
+			newInv = ExpBottle.getExpBottleRecipe();
+			player.openInventory(newInv);
+			break;
+		case STICK:
+			if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK"))
+				newInv = FireStick.getFireStickRecipe();
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK"))
+				newInv = WindStick.getWindStickRecipe();
+			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK"))
+				newInv = EarthStick.getEarthStickRecipe();
+			else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK"))
+				newInv = WaterStick.getWaterStickRecipe();
+			player.openInventory(newInv);
+			break;
+		case EMERALD:
+			newInv = XpStorage.getXpStorageRecipe();
+			player.openInventory(newInv);
+		default:
+			break;
 		}
 	}
 	
@@ -174,12 +174,12 @@ public class InventoryRecipeListener implements Listener {
 		if (item == null)
 			return ;
 		
-		if (inv.getName().equals("§8XP Bottle")) {
-			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER) {
-				player.closeInventory();
-				player.openInventory(getCraftsInventory());
-			}
+		if (!inv.getName().equals("§8XP Bottle"))
+			return ;
+		event.setCancelled(true);
+		if (item.getType() == Material.BARRIER) {
+			player.closeInventory();
+			player.openInventory(getCraftsInventory());
 		}
 	}
 	

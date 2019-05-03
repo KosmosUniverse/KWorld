@@ -10,3 +10,6 @@ general:
     - "Player est parti vers d'autres horizons !"
     - "Player reviendra peut-être un jour !"
     - "Il est parti, paix a son âme : Player"
+  plugin:
+    KFun: true
+    KChim: true

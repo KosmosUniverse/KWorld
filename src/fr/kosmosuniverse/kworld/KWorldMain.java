@@ -22,17 +22,26 @@ public class KWorldMain extends JavaPlugin {
 		
 		getServer().getPluginManager().registerEvents(new KWorldListener(this), this);
 		getServer().getPluginManager().registerEvents(new InventoryRecipeListener(/*this*/), this);
-		getServer().getPluginManager().registerEvents(new CustomItemListener(this), this);
-		getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
-		getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);
-		getServer().getPluginManager().registerEvents(new MultiBlockListener(this), this);
 		
 		getCommand("kguide").setExecutor(new KGuide(/*this*/));
 		getCommand("kgive").setExecutor(new KGive(/*this*/));
-		getCommand("kspawn").setExecutor(new KSpawn());
 		
 		getCommand("kgive").setTabCompleter(new KGiveTab());
-		getCommand("kspawn").setTabCompleter(new KSpawnTab());
+		
+		boolean KFun = getConfig().getBoolean("general.plugin.KFun");
+		boolean KChim = getConfig().getBoolean("general.plugin.KChim");
+		
+		if (KFun) {
+			getServer().getPluginManager().registerEvents(new CustomItemListener(this), this);
+			getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
+			getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);	
+		}
+		else if (KChim) {
+			getServer().getPluginManager().registerEvents(new MultiBlockListener(this), this);
+			getCommand("kspawn").setExecutor(new KSpawn());			
+			getCommand("kspawn").setTabCompleter(new KSpawnTab());
+
+		}
 		
 		AddRecipes recipes = new AddRecipes(this);
 		recipes.addAll();
