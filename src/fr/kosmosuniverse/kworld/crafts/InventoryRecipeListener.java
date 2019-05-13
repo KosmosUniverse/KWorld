@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 
 import fr.kosmosuniverse.kworld.ItemBuilder;
 import fr.kosmosuniverse.kworld.MultiBlocks.Decomposer;
+import fr.kosmosuniverse.kworld.MultiBlocks.Synthetiser;
 //import fr.kosmosuniverse.kworld.KWorldMain;
 import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
@@ -55,6 +56,7 @@ public class InventoryRecipeListener implements Listener {
 		Inventory inv = Bukkit.createInventory(null, 27, "§8MultiBlocks");
 		
 		inv.setItem(0, new ItemBuilder(Material.CHISELED_STONE_BRICKS, "Decomposer").getItem());
+		inv.setItem(1, new ItemBuilder(Material.CHISELED_QUARTZ_BLOCK, "Synthetiser").getItem());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -150,6 +152,9 @@ public class InventoryRecipeListener implements Listener {
 			case CHISELED_STONE_BRICKS:
 				player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
 				break ;
+			case CHISELED_QUARTZ_BLOCK:
+				player.openInventory(new Synthetiser().getInventory(inv, item.getType(), getMultiBlockInventory()));
+				break ;
 			default:
 				break ;
 			}
@@ -163,6 +168,8 @@ public class InventoryRecipeListener implements Listener {
 		
 		if (inv.getName().contains("Decomposer"))
 			player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
+		if (inv.getName().contains("Synthetiser"))
+			player.openInventory(new Synthetiser().getInventory(inv, item.getType(), getMultiBlockInventory()));
 	}
 	
 	@EventHandler

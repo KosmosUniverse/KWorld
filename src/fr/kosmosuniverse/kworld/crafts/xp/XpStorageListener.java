@@ -1,4 +1,4 @@
-package fr.kosmosuniverse.kworld.crafts;
+package fr.kosmosuniverse.kworld.crafts.xp;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -9,9 +9,6 @@ import org.bukkit.event.entity.ItemMergeEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
-
-//import fr.kosmosuniverse.kworld.KWorldMain;
-import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
 
 public class XpStorageListener implements Listener {
 	/*private KWorldMain main;

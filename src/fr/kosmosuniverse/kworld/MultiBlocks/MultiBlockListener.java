@@ -27,6 +27,7 @@ public class MultiBlockListener implements Listener {
 		Cores = new ArrayList<Material>();
 		
 		this.MBList.add(new Decomposer());
+		this.MBList.add(new Synthetiser());
 		
 		for (IMultiBlock mb : MBList) {
 			if (!Cores.contains(mb.getMultiblock().getCore()))

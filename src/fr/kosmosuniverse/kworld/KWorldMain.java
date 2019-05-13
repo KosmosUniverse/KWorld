@@ -11,7 +11,7 @@ import fr.kosmosuniverse.kworld.commands.KSpawn;
 import fr.kosmosuniverse.kworld.commands.KSpawnTab;
 import fr.kosmosuniverse.kworld.crafts.AddRecipes;
 import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
-import fr.kosmosuniverse.kworld.crafts.XpStorageListener;
+import fr.kosmosuniverse.kworld.crafts.xp.XpStorageListener;
 
 public class KWorldMain extends JavaPlugin {
 	@Override
@@ -36,11 +36,10 @@ public class KWorldMain extends JavaPlugin {
 			getServer().getPluginManager().registerEvents(new EntityListener(/*this*/), this);
 			getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);	
 		}
-		else if (KChim) {
+		if (KChim) {
 			getServer().getPluginManager().registerEvents(new MultiBlockListener(this), this);
 			getCommand("kspawn").setExecutor(new KSpawn());			
 			getCommand("kspawn").setTabCompleter(new KSpawnTab());
-
 		}
 		
 		AddRecipes recipes = new AddRecipes(this);

@@ -21,6 +21,7 @@ public class KSpawnTab implements TabCompleter {
 			
 			//Sticks
 			list.add("Decomposer");
+			list.add("Synthetiser");
 			
 			return list;
 		}

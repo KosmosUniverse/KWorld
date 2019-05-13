@@ -29,8 +29,9 @@ public class KGive implements CommandExecutor {
 		
 		Player player = (Player) sender;
 		
-		if (args.length == 0 || args.length > 2) {
+		if (args == null || args.length == 0 || args.length > 2) {
 			player.sendMessage("§3[KWorld] : §c/kgive <item> [number <= 64]");
+			return false;
 		}
 		
 		if (!checkSpace(player)) {

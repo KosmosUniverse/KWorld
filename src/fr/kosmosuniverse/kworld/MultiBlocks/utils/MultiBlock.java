@@ -32,15 +32,14 @@ public class MultiBlock {
 		for (Pattern p : patterns) {
 			if (!types.contains(p.getMaterial()))
 				types.add(p.getMaterial());
-			}
-		
+		}
 		return types;
 	}
-	
+
 	public boolean checkMultiBlock(Location CoreLoc, Player player) {
 		Location newLoc = new Location(CoreLoc.getWorld(), CoreLoc.getBlockX(), CoreLoc.getBlockY(), CoreLoc.getBlockZ());
 		Location tmp;
-		
+
 		for (Pattern p : patterns) {
 			tmp = newLoc.clone();
 			tmp.add(p.getX(), p.getY(), p.getZ());
@@ -49,13 +48,13 @@ public class MultiBlock {
 		}
 		return true;
 	}
-	
+
 	public void spawnMultiBlock(Player player) {
 		Location newLoc = new Location(player.getLocation().getWorld(), player.getLocation().getBlockX(), player.getLocation().getBlockY(), player.getLocation().getBlockZ());
 		Location tmp;
-		
+
 		newLoc.getBlock().setType(this.Core);
-		
+
 		for (Pattern p : patterns) {
 			tmp = newLoc.clone();
 			tmp.add(p.getX(), p.getY(), p.getZ());
