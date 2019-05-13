@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import fr.kosmosuniverse.kworld.ItemBuilder;
 import fr.kosmosuniverse.kworld.MultiBlocks.Decomposer;
 import fr.kosmosuniverse.kworld.MultiBlocks.Synthetiser;
+import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
 //import fr.kosmosuniverse.kworld.KWorldMain;
 import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
@@ -47,6 +48,7 @@ public class InventoryRecipeListener implements Listener {
 		inv.setItem(3, EarthStick.EarthStickSampleBuilder());
 		inv.setItem(4, WaterStick.WaterStickSampleBuilder());
 		inv.setItem(5, XpStorage.xpStorageSampleBuilder());
+		inv.setItem(6, ChimActivator.ActivatorBuilder());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
 		return inv;
@@ -128,6 +130,9 @@ public class InventoryRecipeListener implements Listener {
 			break;
 		case EMERALD:
 			newInv = XpStorage.getXpStorageRecipe();
+			player.openInventory(newInv);
+		case END_ROD:
+			newInv = ChimActivator.getActivatorRecipe();
 			player.openInventory(newInv);
 		default:
 			break;
@@ -234,6 +239,23 @@ public class InventoryRecipeListener implements Listener {
 				player.closeInventory();
 				player.openInventory(XpStorage.getXpStorageRecipe());
 			}
+		}
+	}
+	
+	@EventHandler
+	public void onActivatorClick(InventoryClickEvent event) {
+		Inventory inv = event.getInventory();
+		Player player = (Player) event.getWhoClicked();
+		ItemStack item = event.getCurrentItem();
+		
+		if (item == null)
+			return ;
+		
+		if (inv.getName().equals("§8Activator")) {
+			event.setCancelled(true);
+			if (item.getType() == Material.BARRIER) {
+				player.closeInventory();
+				player.openInventory(getCraftsInventory());			}
 		}
 	}
 }

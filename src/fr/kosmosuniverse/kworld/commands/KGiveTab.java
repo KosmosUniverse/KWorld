@@ -42,6 +42,9 @@ public class KGiveTab implements TabCompleter {
 			list.add("XpStorageTierIV");
 			list.add("XpStorageTierV");
 			
+			//Activator
+			list.add("Activator");
+			
 			return list;
 		}
 		return null;

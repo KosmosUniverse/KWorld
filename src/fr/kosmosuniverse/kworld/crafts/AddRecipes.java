@@ -1,6 +1,7 @@
 package fr.kosmosuniverse.kworld.crafts;
 
 import fr.kosmosuniverse.kworld.KWorldMain;
+import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
 import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
@@ -44,5 +45,7 @@ public class AddRecipes {
 		main.getServer().addRecipe(xp.getXpStorageTierIII());
 		main.getServer().addRecipe(xp.getXpStorageTierIV());
 		main.getServer().addRecipe(xp.getXpStorageTierV());
+		
+		main.getServer().addRecipe(new ChimActivator(main).getActivator());
 	}
 }

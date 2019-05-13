@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
 import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
 import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
 import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
@@ -103,6 +104,8 @@ public class KGive implements CommandExecutor {
 			return XpStorage.xpStorageBuilder(4);
 		case "XpStorageTierV":
 			return XpStorage.xpStorageBuilder(5);
+		case "Activator":
+			return ChimActivator.ActivatorBuilder();
 		default:
 			return null;
 		}

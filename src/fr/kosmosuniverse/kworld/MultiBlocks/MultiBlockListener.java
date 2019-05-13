@@ -62,6 +62,9 @@ public class MultiBlockListener implements Listener {
 		if (action != Action.RIGHT_CLICK_BLOCK || item == null)
 			return ;
 		
+		if (!(item.getType() == Material.END_ROD && item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().equals("Activator"))) { 
+			return ;
+		}
 		Block block = event.getClickedBlock();
 		
 		if (!Cores.contains(block.getType()))
@@ -75,5 +78,14 @@ public class MultiBlockListener implements Listener {
 				}
 			}
 		}
+	}
+	
+	@EventHandler
+	public void onActivatorPlaced(BlockPlaceEvent event) {
+		Block block = event.getBlockAgainst();
+				
+		if (!Cores.contains(block.getType()))
+			return ;
+		event.setCancelled(true);
 	}
 }
