@@ -64,7 +64,7 @@ public class Elements {
 		map.put(54, new Element("Xenon", "Xe", 54));
 	}
 	
-	public HashMap<Integer, Element> getList() {
+	public HashMap<Integer, Element> getMap() {
 		return map;
 	}
 }

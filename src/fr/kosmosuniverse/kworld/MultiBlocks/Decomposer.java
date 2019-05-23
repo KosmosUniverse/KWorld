@@ -1,10 +1,13 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.BlockFace;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,9 +18,11 @@ import fr.kosmosuniverse.kworld.MultiBlocks.utils.ActivationType;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.MultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.Pattern;
+import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
+import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
 
 public class Decomposer extends IMultiBlock{
-
+	
 	public Decomposer() {
 		this.name = "Decomposer";
 		this.invs = new ArrayList<Inventory>();
@@ -161,12 +166,40 @@ public class Decomposer extends IMultiBlock{
 	}
 
 	@Override
-	public void onActivate(Plugin plugin, Player player, Location location, ActivationType type) {
+	public void onActivate(Plugin plugin, Player player, Location location, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
 		if (type == ActivationType.ASSEMBLE) {
 			player.sendMessage("You just constructed Decomposer !");
 		}
 		else if (type == ActivationType.ACTIVATE) {
 			player.sendMessage("You just activated Decomposer !");
+			Chest chest = (Chest) location.getBlock().getRelative(BlockFace.UP);
+			if (!checkChest(chest, player))
+				return ;
 		}
+	}
+	
+	private boolean checkChest(Chest chest, Player player) {
+		Inventory inv = chest.getInventory();
+		
+		if (inv.getSize() == 0) {
+			player.sendMessage("[KWorld] : If you want to use Decomposer you need to put something to decompose in the chest before activate it !");
+			return false;
+		}
+
+		Integer i = 0;
+		
+		for (ItemStack item : inv.getContents()) {
+			if (item.getType() != Material.GLASS_BOTTLE) {
+				player.sendMessage("[KWorld] : For now, you need to put a Molecule only !");
+				return false;
+			}
+			if (i != 0) {
+				player.sendMessage("[KWorld] : You have to put only one type of Molecule in the chest !");
+				return false;
+			}
+			i += 1;
+		}
+
+		return true;
 	}
 }

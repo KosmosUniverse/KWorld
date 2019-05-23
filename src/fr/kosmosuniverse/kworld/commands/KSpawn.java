@@ -7,19 +7,14 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import fr.kosmosuniverse.kworld.MultiBlocks.Decomposer;
-import fr.kosmosuniverse.kworld.MultiBlocks.Synthetiser;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 
 public class KSpawn implements CommandExecutor{
 
 	private ArrayList<IMultiBlock> MBList;
 	
-	public KSpawn() {
-		MBList = new ArrayList<IMultiBlock>();
-		
-		MBList.add(new Decomposer());
-		MBList.add(new Synthetiser());
+	public KSpawn(ArrayList<IMultiBlock> MBList) {
+		this.MBList = MBList;
 	}
 	
 	@Override
@@ -33,7 +28,7 @@ public class KSpawn implements CommandExecutor{
 		if (args.length != 1)
 			return false;
 
-		for (IMultiBlock mb : MBList) {
+		for (IMultiBlock mb : this.MBList) {
 			if (mb.getName().equalsIgnoreCase(args[0])) {
 				mb.getMultiblock().spawnMultiBlock(player);
 			}

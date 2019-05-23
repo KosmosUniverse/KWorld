@@ -8,8 +8,16 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
+import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
+
 public class KSpawnTab implements TabCompleter {
 
+	private ArrayList<IMultiBlock> MBList;
+	
+	public KSpawnTab(ArrayList<IMultiBlock> MBList) {
+		this.MBList = MBList;
+	}
+	
 	@Override
 	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("kspawn")) {
@@ -19,9 +27,12 @@ public class KSpawnTab implements TabCompleter {
 			
 			List<String> list = new ArrayList<String>();
 			
-			//Sticks
-			list.add("Decomposer");
-			list.add("Synthetiser");
+			for (IMultiBlock m : MBList) {
+				list.add(m.getName());
+			}
+			
+			///list.add("Decomposer");
+			///list.add("Synthetiser");
 			
 			return list;
 		}

@@ -73,4 +73,8 @@ public class Molecules {
 				new Compose(this.elements.get(16), 1),
 				new Compose(this.elements.get(8), 4	)));
 	}
+	
+	public ArrayList<Molecule> getMoleculeList() {
+		return molecules;
+	}
 }
