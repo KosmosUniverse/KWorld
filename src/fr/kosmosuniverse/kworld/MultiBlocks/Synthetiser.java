@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -167,7 +167,7 @@ public class Synthetiser extends IMultiBlock {
 	}
 
 	@Override
-	public void onActivate(Plugin plugin, Player player, Location location, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
+	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
 		if (type == ActivationType.ASSEMBLE) {
 			player.sendMessage("You just constructed Synthetiser !");
 		}

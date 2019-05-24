@@ -55,7 +55,7 @@ public class MultiBlockListener implements Listener {
 		for (IMultiBlock mb : this.MBList) {
 			if (mb.getMultiblock().getCore() == block.getType()) {
 				if (mb.getMultiblock().checkMultiBlock(block.getLocation(), player)) {
-					mb.onActivate(this.plugin, player, block.getLocation(), ActivationType.ASSEMBLE, this.Elems, this.Mols);
+					mb.onActivate(this.plugin, player, block, ActivationType.ASSEMBLE, this.Elems, this.Mols);
 					return ;
 				}
 			}
@@ -74,6 +74,7 @@ public class MultiBlockListener implements Listener {
 		if (!(item.getType() == Material.END_ROD && item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getItemMeta().getDisplayName().equals("Activator"))) { 
 			return ;
 		}
+		
 		Block block = event.getClickedBlock();
 		
 		if (!Cores.contains(block.getType()))
@@ -82,7 +83,7 @@ public class MultiBlockListener implements Listener {
 		for (IMultiBlock mb : this.MBList) {
 			if (mb.getMultiblock().getCore() == block.getType()) {
 				if (mb.getMultiblock().checkMultiBlock(block.getLocation(), player)) {
-					mb.onActivate(this.plugin, player, block.getLocation(), ActivationType.ACTIVATE, this.Elems, this.Mols);
+					mb.onActivate(this.plugin, player, block, ActivationType.ACTIVATE, this.Elems, this.Mols);
 					return ;
 				}
 			}

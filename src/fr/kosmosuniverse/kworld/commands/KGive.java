@@ -78,11 +78,11 @@ public class KGive implements CommandExecutor {
 		return false;
 	}
 	
-	private ItemStack itemMultiplier(ItemStack item, int multi) {
+	public static ItemStack itemMultiplier(ItemStack item, int multi) {
 		ItemStack it = new ItemStack(item.getType(), multi);
 		
 		it.setItemMeta(item.getItemMeta());
-		item = it;
-		return item;
+		
+		return it;
 	}
 }

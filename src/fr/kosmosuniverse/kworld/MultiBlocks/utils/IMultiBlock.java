@@ -3,8 +3,8 @@ package fr.kosmosuniverse.kworld.MultiBlocks.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
@@ -17,7 +17,7 @@ public abstract class IMultiBlock {
 	protected MultiBlock multiblock;
 	protected ArrayList<Inventory> invs;
 	
-	public abstract void onActivate(Plugin plugin, Player player, Location location, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols);
+	public abstract void onActivate(Plugin plugin, Player player, Block block, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols);
 	public abstract void createInventories();
 	
 	public Inventory getInventory(Inventory before, Material material, Inventory upInv) {

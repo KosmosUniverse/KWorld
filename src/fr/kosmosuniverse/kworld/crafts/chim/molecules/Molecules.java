@@ -25,19 +25,19 @@ public class Molecules {
 				new Compose(this.elements.get(1), 2),
 				new Compose(this.elements.get(8), 1)));
 		
-		molecules.add(new Molecule("Hydrogen Peroxide", "H2O2",
+		molecules.add(new Molecule("Hydrogen_Peroxide", "H2O2",
 				new Compose(this.elements.get(1), 2),
 				new Compose(this.elements.get(8), 2)));
 		
-		molecules.add(new Molecule("Potassium Oxide", "K2O",
+		molecules.add(new Molecule("Potassium_Oxide", "K2O",
 				new Compose(this.elements.get(19), 2),
 				new Compose(this.elements.get(8), 1)));
 		
-		molecules.add(new Molecule("Carbon Dioxide", "CO2",
+		molecules.add(new Molecule("Carbon_Dioxide", "CO2",
 				new Compose(this.elements.get(6), 1),
 				new Compose(this.elements.get(8), 2)));
 		
-		molecules.add(new Molecule("Nitrogen Dioxide", "NO2",
+		molecules.add(new Molecule("Nitrogen_Dioxide", "NO2",
 				new Compose(this.elements.get(7), 1),
 				new Compose(this.elements.get(8), 2)));
 		
@@ -45,12 +45,12 @@ public class Molecules {
 				new Compose(this.elements.get(6), 7),
 				new Compose(this.elements.get(1), 8)));
 		
-		molecules.add(new Molecule("Potassium Nitrate", "KNO3",
+		molecules.add(new Molecule("Potassium_Nitrate", "KNO3",
 				new Compose(this.elements.get(19), 1),
 				new Compose(this.elements.get(7), 1),
 				new Compose(this.elements.get(8), 3)));
 		
-		molecules.add(new Molecule("Silicon Dioxide", "SiO2",
+		molecules.add(new Molecule("Silicon_Dioxide", "SiO2",
 				new Compose(this.elements.get(14), 1),
 				new Compose(this.elements.get(8), 2)));
 		
