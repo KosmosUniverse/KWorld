@@ -16,6 +16,7 @@ import org.bukkit.plugin.Plugin;
 
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.ActivationType;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
+import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
 
@@ -92,10 +93,9 @@ public class MultiBlockListener implements Listener {
 	
 	@EventHandler
 	public void onActivatorPlaced(BlockPlaceEvent event) {
-		Block block = event.getBlockAgainst();
-				
-		if (!Cores.contains(block.getType()))
-			return ;
-		event.setCancelled(true);
+		ItemStack item = event.getItemInHand();
+		
+		if (item.equals(ChimActivator.ActivatorBuilder()))
+			event.setCancelled(true);
 	}
 }
