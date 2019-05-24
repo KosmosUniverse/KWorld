@@ -15,7 +15,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
+import fr.kosmosuniverse.kworld.crafts.fun.xp.XpStorage;
 
 public class CustomItemListener implements Listener {
 

@@ -1,4 +1,4 @@
-package fr.kosmosuniverse.kworld.crafts.xp;
+package fr.kosmosuniverse.kworld.crafts.fun.xp;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;

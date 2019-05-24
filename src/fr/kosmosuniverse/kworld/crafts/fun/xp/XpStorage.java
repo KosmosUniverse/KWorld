@@ -1,5 +1,6 @@
-package fr.kosmosuniverse.kworld.crafts.xp;
+package fr.kosmosuniverse.kworld.crafts.fun.xp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.bukkit.Bukkit;
@@ -59,25 +60,17 @@ public class XpStorage {
 		xpStorageTierV.setIngredient('N', Material.NETHER_STAR);
 		xpStorageTierV.setIngredient('S', xpStorageBuilder(4).getData());
 	}
-	
-	public ShapedRecipe getXpStorageTierI() {
-		return xpStorageTierI;
-	}
-	
-	public ShapedRecipe getXpStorageTierII() {
-		return xpStorageTierII;
-	}
-	
-	public ShapedRecipe getXpStorageTierIII() {
-		return xpStorageTierIII;
-	}
-	
-	public ShapedRecipe getXpStorageTierIV() {
-		return xpStorageTierIV;
-	}
-	
-	public ShapedRecipe getXpStorageTierV() {
-		return xpStorageTierV;
+
+	public ArrayList<ShapedRecipe> getRecipes() {
+		ArrayList<ShapedRecipe> recipes = new ArrayList<ShapedRecipe>();
+		
+		recipes.add(xpStorageTierI);
+		recipes.add(xpStorageTierII);
+		recipes.add(xpStorageTierIII);
+		recipes.add(xpStorageTierIV);
+		recipes.add(xpStorageTierV);
+		
+		return recipes;
 	}
 	
 	public static ItemStack xpStorageBuilder(int tier) {

@@ -20,6 +20,7 @@ public class Molecule {
 		this.name = name;
 		this.symbols = symbols;
 		this.compose = new ArrayList<Compose>();
+		this.elems = new ArrayList<Element>();
 		
 		for (Compose c : comp) {
 			this.compose.add(c);
@@ -51,7 +52,7 @@ public class Molecule {
 		return this.symbols;
 	}
 		
-	public ItemStack getElem() {
+	public ItemStack getMol() {
 		return this.item;
 	}
 	

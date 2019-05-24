@@ -1,27 +1,40 @@
 package fr.kosmosuniverse.kworld.commands;
 
+import java.util.HashMap;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
-import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
-import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
-import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
-import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
-import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
-
-//import fr.kosmosuniverse.kworld.KWorldMain;
+import fr.kosmosuniverse.kworld.KWorldMain;
 
 public class KGive implements CommandExecutor {
 
-	//private KWorldMain main;
+	private KWorldMain main;
+	private HashMap<String, ItemStack> itemMap;
 	
-	/*public KGive(KWorldMain main) {
+	public KGive(KWorldMain main, HashMap<String, ItemStack> funMap, HashMap<String, ItemStack> chimMap) {
+		
 		this.main = main;
-	}*/
+		this.itemMap = new HashMap<String, ItemStack>();
+		
+		boolean KFun = this.main.getConfig().getBoolean("general.plugin.KFun");
+		boolean KChim = this.main.getConfig().getBoolean("general.plugin.KChim");
+
+		
+		if (KFun) {
+			for (String key : funMap.keySet()) {
+				this.itemMap.put(key, funMap.get(key));
+			}
+		}
+		if (KChim) {
+			for (String key : chimMap.keySet()) {
+				this.itemMap.put(key, chimMap.get(key));
+			}
+		}
+	}
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -31,7 +44,7 @@ public class KGive implements CommandExecutor {
 		Player player = (Player) sender;
 		
 		if (args == null || args.length == 0 || args.length > 2) {
-			player.sendMessage("§3[KWorld] : §c/kgive <item> [number <= 64]");
+			player.sendMessage("§3[KWorld] : §c/kgive <item> [0 < number <= 64]");
 			return false;
 		}
 		
@@ -40,22 +53,19 @@ public class KGive implements CommandExecutor {
 			return false;
 		}
 		
-		player.sendMessage(Integer.toString(args.length));
-		
-		ItemStack item;
-		
-		if ((item = getItemName(args[0])) == null) {
+		if (!itemMap.containsKey(args[0])) {
 			player.sendMessage("§3[KWolrd] : /kgive " + args[0] + " = invalid argument");
 			return false;
 		}
+
 		if (args.length == 1)
-			player.getInventory().addItem(item);
+			player.getInventory().addItem(itemMap.get(args[0]));
 		else if (args.length == 2) {
 			if (!(Integer.parseInt(args[1]) > 0 && Integer.parseInt(args[1]) < 65)) {
-				player.sendMessage("§3[KWolrd] : /kgive " + args[0] + " " + args[1] + " invalid number (0 < num < 65)");
+				player.sendMessage("§3[KWolrd] : /kgive " + args[0] + " " + args[1] + " invalid number (0 < num <= 64)");
 				return false;
 			}
-			player.getInventory().addItem(itemMultiplier(item, Integer.parseInt(args[1])));
+			player.getInventory().addItem(itemMultiplier(itemMap.get(args[0]), Integer.parseInt(args[1])));
 		}
 		return true;
 	}
@@ -66,49 +76,6 @@ public class KGive implements CommandExecutor {
 				return true;
 		}
 		return false;
-	}
-	
-	private ItemStack getItemName(String item) {
-		switch (item) {
-		case "FireStickTierI":
-			return FireStick.FireStickBuilder(1);
-		case "FireStickTierII":
-			return FireStick.FireStickBuilder(2);
-		case "FireStickTierIII":
-			return FireStick.FireStickBuilder(3);
-		case "WindStickTierI":
-			return WindStick.WindStickBuilder(1);
-		case "WindStickTierII":
-			return WindStick.WindStickBuilder(2);
-		case "WindStickTierIII":
-			return WindStick.WindStickBuilder(3);
-		case "EarthStickTierI":
-			return EarthStick.EarthStickBuilder(1);
-		case "EarthStickTierII":
-			return EarthStick.EarthStickBuilder(2);
-		case "EarthStickTierIII":
-			return EarthStick.EarthStickBuilder(3);
-		case "WaterStickTierI":
-			return WaterStick.WaterStickBuilder(1);
-		case "WaterStickTierII":
-			return WaterStick.WaterStickBuilder(2);
-		case "WaterStickTierIII":
-			return WaterStick.WaterStickBuilder(3);
-		case "XpStorageTierI":
-			return XpStorage.xpStorageBuilder(1);
-		case "XpStorageTierII":
-			return XpStorage.xpStorageBuilder(2);
-		case "XpStorageTierIII":
-			return XpStorage.xpStorageBuilder(3);
-		case "XpStorageTierIV":
-			return XpStorage.xpStorageBuilder(4);
-		case "XpStorageTierV":
-			return XpStorage.xpStorageBuilder(5);
-		case "Activator":
-			return ChimActivator.ActivatorBuilder();
-		default:
-			return null;
-		}
 	}
 	
 	private ItemStack itemMultiplier(ItemStack item, int multi) {

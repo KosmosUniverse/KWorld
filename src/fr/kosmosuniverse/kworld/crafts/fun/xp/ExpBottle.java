@@ -1,4 +1,6 @@
-package fr.kosmosuniverse.kworld.crafts.xp;
+package fr.kosmosuniverse.kworld.crafts.fun.xp;
+
+import java.util.ArrayList;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -45,23 +47,18 @@ public class ExpBottle {
 		expBottleDiam.setIngredient('S', Material.SAND);
 		expBottleDiam.setIngredient('C', Material.DIAMOND_ORE);
 	}
-	
-	public ShapedRecipe getBottleCoal() {
-		return expBottleCoal;
+
+	public ArrayList<ShapedRecipe> getRecipes() {
+		ArrayList<ShapedRecipe> recipes = new ArrayList<ShapedRecipe>();
+		
+		recipes.add(expBottleCoal);
+		recipes.add(expBottleRed);
+		recipes.add(expBottleLap);
+		recipes.add(expBottleDiam);
+		
+		return recipes;
 	}
-	
-	public ShapedRecipe getBottleRed() {
-		return expBottleRed;
-	}
-	
-	public ShapedRecipe getBottleLap() {
-		return expBottleLap;
-	}
-	
-	public ShapedRecipe getBottleDiam() {
-		return expBottleDiam;
-	}
-	
+		
 	public static Inventory getExpBottleRecipe() {
 		Inventory inv = Bukkit.createInventory(null, 54, "§8XP Bottle");
 		

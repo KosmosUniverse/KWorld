@@ -1,148 +1,75 @@
-package fr.kosmosuniverse.kworld.crafts.stick;
-
-import java.util.Arrays;
+package fr.kosmosuniverse.kworld.crafts.fun.stick;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.ShapedRecipe;
-import org.bukkit.inventory.meta.ItemMeta;
 
 import fr.kosmosuniverse.kworld.ItemBuilder;
 import fr.kosmosuniverse.kworld.KWorldMain;
 
-public class EarthStick {
-	
-	private KWorldMain main;
-	private ShapedRecipe EarthStickTierI;
-	private ShapedRecipe EarthStickTierII;
-	private ShapedRecipe EarthStickTierIII;
+public class EarthStick extends AStick3T {
 	
 	public EarthStick(KWorldMain main) {
-		this.main = main;
+		super(main, "EARTH", "§a" , Enchantment.DAMAGE_ARTHROPODS, Enchantment.DAMAGE_UNDEAD);
+	}
+			
+	@Override
+	public void StickInventory() {
+		this.inv = Bukkit.createInventory(null, 54, "§8Earth Stick");
 		
-		EarthStickTierI = new ShapedRecipe(new NamespacedKey(this.main, "EarthStick1"), EarthStickBuilder(1));
-		EarthStickTierII = new ShapedRecipe(new NamespacedKey(this.main, "EarthStick2"), EarthStickBuilder(2));
-		EarthStickTierIII = new ShapedRecipe(new NamespacedKey(this.main, "EarthStick3"), EarthStickBuilder(3));
+		this.inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		
-		EarthStickTierI.shape("FFF", "FSF", "FFF");
-		EarthStickTierI.setIngredient('F', Material.SOUL_SAND);
-		EarthStickTierI.setIngredient('S', Material.STICK);
+		this.inv.setItem(9, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(10, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(11, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(18, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(19, new ItemStack(Material.STICK));
+		this.inv.setItem(20, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(27, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(28, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(29, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(46, StickBuilder(1));
 		
-		EarthStickTierII.shape("FFF", "GSG", "FFF");
-		EarthStickTierII.setIngredient('F', Material.SOUL_SAND);
-		EarthStickTierII.setIngredient('G', Material.GHAST_TEAR);
-		EarthStickTierII.setIngredient('S', new ItemBuilder(Material.STICK, "§aEARTH STICK TIER I", 1).getItem().getData());
+		this.inv.setItem(12, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(13, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(14, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(21, new ItemStack(Material.GHAST_TEAR));
+		this.inv.setItem(22, StickBuilder(1));
+		this.inv.setItem(23, new ItemStack(Material.GHAST_TEAR));
+		this.inv.setItem(30, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(31, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(32, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(49, StickBuilder(2));
+		
+		this.inv.setItem(15, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(16, new ItemStack(Material.WITHER_SKELETON_SKULL));
+		this.inv.setItem(17, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(24, new ItemStack(Material.GHAST_TEAR));
+		this.inv.setItem(25, StickBuilder(2));
+		this.inv.setItem(26, new ItemStack(Material.GHAST_TEAR));
+		this.inv.setItem(33, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(34, new ItemStack(Material.WITHER_SKELETON_SKULL));
+		this.inv.setItem(35, new ItemStack(Material.SOUL_SAND));
+		this.inv.setItem(52, StickBuilder(3));
+	}
 
-		EarthStickTierIII.shape("FHF", "GSG", "FHF");
-		EarthStickTierIII.setIngredient('F', Material.SOUL_SAND);
-		EarthStickTierIII.setIngredient('G', Material.GHAST_TEAR);
-		EarthStickTierIII.setIngredient('H', Material.WITHER_SKELETON_SKULL);
-		EarthStickTierIII.setIngredient('S', new ItemBuilder(Material.STICK, "§aEARTH STICK TIER II", 1).getItem().getData());
+	@Override
+	public void Shapes() {
+		this.StickTierI.shape("FFF", "FSF", "FFF");
+		this.StickTierI.setIngredient('F', Material.SOUL_SAND);
+		this.StickTierI.setIngredient('S', Material.STICK);
+		
+		this.StickTierII.shape("FFF", "GSG", "FFF");
+		this.StickTierII.setIngredient('F', Material.SOUL_SAND);
+		this.StickTierII.setIngredient('G', Material.GHAST_TEAR);
+		this.StickTierII.setIngredient('S', new ItemBuilder(Material.STICK, "§aEARTH STICK TIER I", 1).getItem().getData());
 
-	}
-	
-	public ShapedRecipe getEarthStickTierI() {
-		return EarthStickTierI;
-	}
-	
-	public ShapedRecipe getEarthStickTierII() {
-		return EarthStickTierII;
-	}
-	
-	public ShapedRecipe getEarthStickTierIII() {
-		return EarthStickTierIII;
-	}
-	
-	public static ItemStack EarthStickBuilder(int tier) {
-		ItemStack stick = new ItemStack(Material.STICK);
-		ItemMeta stickM = stick.getItemMeta();
-		
-		switch (tier) {
-		case 1:
-			stickM.setDisplayName("§aEARTH STICK TIER I");
-			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 0, true);
-			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 0, true);
-			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-			stickM.setLore(Arrays.asList("Durability:200/200"));
-			break;
-		case 2:
-			stickM.setDisplayName("§aEARTH STICK TIER II");
-			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 3, true);
-			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 3, true);
-			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-			stickM.setLore(Arrays.asList("Durability:400/400"));
-			break;
-		case 3:
-			stickM.setDisplayName("§aEARTH STICK TIER III");
-			stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 5, true);
-			stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 5, true);
-			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-			stickM.setLore(Arrays.asList("Durability:600/600"));
-			break;
-		}
-		
-		stick.setItemMeta(stickM);
-		
-		return stick;
-	}
-	
-	public static ItemStack EarthStickSampleBuilder() {
-		ItemStack stick = new ItemStack(Material.STICK);
-		ItemMeta stickM = stick.getItemMeta();
-		
-		stickM.setDisplayName("§aEARTH STICK");
-		stickM.addEnchant(Enchantment.DAMAGE_ARTHROPODS, 5, true);
-		stickM.addEnchant(Enchantment.DAMAGE_UNDEAD, 5, true);
-		stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		
-		stick.setItemMeta(stickM);
-		
-		return stick;
-	}
-	
-	public static Inventory getEarthStickRecipe() {
-		Inventory inv = Bukkit.createInventory(null, 54, "§8Earth Stick");
-		
-		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
-		
-		inv.setItem(9, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(10, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(11, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(18, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(19, new ItemStack(Material.STICK));
-		inv.setItem(20, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(27, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(28, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(29, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(46, EarthStickBuilder(1));
-		
-		inv.setItem(12, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(13, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(14, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(21, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(22, EarthStickBuilder(1));
-		inv.setItem(23, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(30, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(31, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(32, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(49, EarthStickBuilder(2));
-		
-		inv.setItem(15, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(16, new ItemStack(Material.WITHER_SKELETON_SKULL));
-		inv.setItem(17, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(24, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(25, EarthStickBuilder(2));
-		inv.setItem(26, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(33, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(34, new ItemStack(Material.WITHER_SKELETON_SKULL));
-		inv.setItem(35, new ItemStack(Material.SOUL_SAND));
-		inv.setItem(52, EarthStickBuilder(3));
-		
-		return inv;
+		this.StickTierIII.shape("FHF", "GSG", "FHF");
+		this.StickTierIII.setIngredient('F', Material.SOUL_SAND);
+		this.StickTierIII.setIngredient('G', Material.GHAST_TEAR);
+		this.StickTierIII.setIngredient('H', Material.WITHER_SKELETON_SKULL);
+		this.StickTierIII.setIngredient('S', new ItemBuilder(Material.STICK, "§aEARTH STICK TIER II", 1).getItem().getData());
 	}
 }
+ 

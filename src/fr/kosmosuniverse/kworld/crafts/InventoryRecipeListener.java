@@ -10,23 +10,23 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
 import fr.kosmosuniverse.kworld.ItemBuilder;
+import fr.kosmosuniverse.kworld.KWorldMain;
 import fr.kosmosuniverse.kworld.MultiBlocks.Decomposer;
 import fr.kosmosuniverse.kworld.MultiBlocks.Synthetiser;
 import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
-//import fr.kosmosuniverse.kworld.KWorldMain;
-import fr.kosmosuniverse.kworld.crafts.stick.EarthStick;
-import fr.kosmosuniverse.kworld.crafts.stick.FireStick;
-import fr.kosmosuniverse.kworld.crafts.stick.WaterStick;
-import fr.kosmosuniverse.kworld.crafts.stick.WindStick;
-import fr.kosmosuniverse.kworld.crafts.xp.ExpBottle;
-import fr.kosmosuniverse.kworld.crafts.xp.XpStorage;
+import fr.kosmosuniverse.kworld.crafts.fun.stick.EarthStick;
+import fr.kosmosuniverse.kworld.crafts.fun.stick.FireStick;
+import fr.kosmosuniverse.kworld.crafts.fun.stick.WaterStick;
+import fr.kosmosuniverse.kworld.crafts.fun.stick.WindStick;
+import fr.kosmosuniverse.kworld.crafts.fun.xp.ExpBottle;
+import fr.kosmosuniverse.kworld.crafts.fun.xp.XpStorage;
 
 public class InventoryRecipeListener implements Listener {
 
-	//private KWorldMain main;
+	private KWorldMain main;
 	
-	public InventoryRecipeListener(/*KWorldMain main*/) {
-		//this.main = main;
+	public InventoryRecipeListener(KWorldMain main) {
+		this.main = main;
 	}
 
 	public static Inventory getGuideInventory() {
@@ -39,14 +39,14 @@ public class InventoryRecipeListener implements Listener {
 		return inv;
 	}
 	
-	public static Inventory getCraftsInventory() {
+	public Inventory getCraftsInventory() {
 		Inventory inv = Bukkit.createInventory(null, 27, "§8Craft");
 		
 		inv.setItem(0, new ItemStack(Material.EXPERIENCE_BOTTLE));
-		inv.setItem(1, FireStick.FireStickSampleBuilder());
-		inv.setItem(2, WindStick.WindStickSampleBuilder());
-		inv.setItem(3, EarthStick.EarthStickSampleBuilder());
-		inv.setItem(4, WaterStick.WaterStickSampleBuilder());
+		inv.setItem(1, new FireStick(this.main).StickSample());
+		inv.setItem(2, new WindStick(this.main).StickSample());
+		inv.setItem(3, new EarthStick(this.main).StickSample());
+		inv.setItem(4, new WaterStick(this.main).StickSample());
 		inv.setItem(5, XpStorage.xpStorageSampleBuilder());
 		inv.setItem(6, ChimActivator.ActivatorBuilder());
 		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
@@ -110,7 +110,6 @@ public class InventoryRecipeListener implements Listener {
 		
 		switch (item.getType()) {
 		case BARRIER:
-			player.closeInventory();
 			player.openInventory(getGuideInventory());
 			break;
 		case EXPERIENCE_BOTTLE:
@@ -118,22 +117,24 @@ public class InventoryRecipeListener implements Listener {
 			player.openInventory(newInv);
 			break;
 		case STICK:
-			if (item.getItemMeta().getDisplayName().equals("§cFIRE STICK"))
-				newInv = FireStick.getFireStickRecipe();
-			else if (item.getItemMeta().getDisplayName().equals("§bWIND STICK"))
-				newInv = WindStick.getWindStickRecipe();
-			else if (item.getItemMeta().getDisplayName().equals("§aEARTH STICK"))
-				newInv = EarthStick.getEarthStickRecipe();
-			else if (item.getItemMeta().getDisplayName().equals("§1WATER STICK"))
-				newInv = WaterStick.getWaterStickRecipe();
+			if (item.getItemMeta().getDisplayName().equals("§cFIRE"))
+				newInv = new FireStick(this.main).getInventory();
+			else if (item.getItemMeta().getDisplayName().equals("§bWIND"))
+				newInv = new WindStick(this.main).getInventory();
+			else if (item.getItemMeta().getDisplayName().equals("§aEARTH"))
+				newInv = new EarthStick(this.main).getInventory();
+			else if (item.getItemMeta().getDisplayName().equals("§1WATER"))
+				newInv = new WaterStick(this.main).getInventory();
 			player.openInventory(newInv);
 			break;
 		case EMERALD:
 			newInv = XpStorage.getXpStorageRecipe();
 			player.openInventory(newInv);
+			break;
 		case END_ROD:
 			newInv = ChimActivator.getActivatorRecipe();
 			player.openInventory(newInv);
+			break;
 		default:
 			break;
 		}
@@ -190,7 +191,6 @@ public class InventoryRecipeListener implements Listener {
 			return ;
 		event.setCancelled(true);
 		if (item.getType() == Material.BARRIER) {
-			player.closeInventory();
 			player.openInventory(getCraftsInventory());
 		}
 	}
@@ -208,8 +208,7 @@ public class InventoryRecipeListener implements Listener {
 				inv.getName().equals("§8Earth Stick") || inv.getName().equals("§8Water Stick")) {
 			event.setCancelled(true);
 			if (item.getType() == Material.BARRIER)
-				player.closeInventory();
-			player.openInventory(getCraftsInventory());
+				player.openInventory(getCraftsInventory());
 		}
 	}
 	
@@ -224,21 +223,15 @@ public class InventoryRecipeListener implements Listener {
 		
 		if (inv.getName().equals("§8XP STORAGE 1")) {
 			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER) {
-				player.closeInventory();
+			if (item.getType() == Material.BARRIER)
 				player.openInventory(getCraftsInventory());
-			}
-			else if (item.getType() == Material.LIME_STAINED_GLASS_PANE) {
-				player.closeInventory();
+			else if (item.getType() == Material.LIME_STAINED_GLASS_PANE)
 				player.openInventory(XpStorage.getXpStorageRecipe2());
-			}
 		}
 		else if (inv.getName().equals("§8XP STORAGE 2")) {
 			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER) {
-				player.closeInventory();
+			if (item.getType() == Material.BARRIER)
 				player.openInventory(XpStorage.getXpStorageRecipe());
-			}
 		}
 	}
 	
@@ -253,9 +246,8 @@ public class InventoryRecipeListener implements Listener {
 		
 		if (inv.getName().equals("§8Activator")) {
 			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER) {
-				player.closeInventory();
-				player.openInventory(getCraftsInventory());			}
+			if (item.getType() == Material.BARRIER)
+				player.openInventory(getCraftsInventory());
 		}
 	}
 }
