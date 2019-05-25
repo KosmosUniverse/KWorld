@@ -74,7 +74,7 @@ public abstract class AStick3T {
 			stickM.setDisplayName(this.color + this.name + " STICK TIER I");
 			
 			for (Enchantment e : this.echants) {
-				stickM.addEnchant(e, 0, true);				
+				stickM.addEnchant(e, 1, true);				
 			}
 
 			stickM.addItemFlags(ItemFlag.HIDE_ENCHANTS);
