@@ -2,7 +2,6 @@ package fr.kosmosuniverse.kworld;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -17,17 +16,15 @@ import fr.kosmosuniverse.kworld.commands.KSpawnTab;
 import fr.kosmosuniverse.kworld.crafts.AddRecipes;
 import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
 import fr.kosmosuniverse.kworld.crafts.chim.ChimList;
-import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
-import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 import fr.kosmosuniverse.kworld.crafts.fun.FunList;
 import fr.kosmosuniverse.kworld.crafts.fun.xp.XpStorageListener;
 
 public class KWorldMain extends JavaPlugin {
 	
-	private HashMap<Integer, Element> Elems = new Elements().getMap();
-	private ArrayList<Molecule> Mols = new Molecules(this, Elems).getMoleculeList();
+	private Elements Elems = new Elements();
+	private Molecules Mols = new Molecules(this, Elems);
 	private ArrayList<IMultiBlock> MBList = new MultiBlockList().getList();
 	private FunList funItems = new FunList(this);
 	private ChimList chimItems = new ChimList(Elems, Mols);
@@ -67,9 +64,7 @@ public class KWorldMain extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		System.out.println("[KWorld] : " + getConfig().getString("general.messages.end"));
-		
-		Elems.clear();
-		Mols.clear();
+
 		MBList.clear();
 	}
 }

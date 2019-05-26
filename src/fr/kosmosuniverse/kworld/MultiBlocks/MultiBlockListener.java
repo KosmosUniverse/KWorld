@@ -1,7 +1,6 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,18 +16,18 @@ import org.bukkit.plugin.Plugin;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.ActivationType;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
-import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
-import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
+import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public class MultiBlockListener implements Listener {
 	private ArrayList<Material> Cores;
 	private ArrayList<IMultiBlock> MBList;
 	private Plugin plugin;
 	
-	private HashMap<Integer, Element> Elems;
-	private ArrayList<Molecule> Mols;
+	private Elements Elems;
+	private Molecules Mols;
 	
-	public MultiBlockListener(Plugin _plugin, ArrayList<IMultiBlock> MBList, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
+	public MultiBlockListener(Plugin _plugin, ArrayList<IMultiBlock> MBList, Elements Elems, Molecules Mols) {
 		Cores = new ArrayList<Material>();
 		
 		this.plugin = _plugin;

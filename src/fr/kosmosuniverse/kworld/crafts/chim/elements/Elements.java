@@ -1,70 +1,94 @@
 package fr.kosmosuniverse.kworld.crafts.chim.elements;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Elements {
-	private HashMap<Integer, Element> map;
+	private ArrayList<Element> list;
 
 	public Elements() {
-		map = new HashMap<Integer, Element>();
+		list = new ArrayList<Element>();
 		
-		map.put(1, new Element("Hydrogen", "H", 1));
-		map.put(2, new Element("Helium", "He", 2));
-		map.put(3, new Element("Lithium", "Li", 3));
-		map.put(4, new Element("Berylium", "Be", 4));
-		map.put(5, new Element("Boron", "B", 5));
-		map.put(6, new Element("Carbon", "C", 6));
-		map.put(7, new Element("Nitrogen", "N", 7));
-		map.put(8, new Element("Oxygen", "O", 8));
-		map.put(9, new Element("Fluorine", "F", 9));
-		map.put(10, new Element("Neon", "Ne", 10));
-		map.put(11, new Element("Sodium", "Na", 11));
-		map.put(12, new Element("Magnesium", "Mg", 12));
-		map.put(13, new Element("Aluminium", "Al", 13));
-		map.put(14, new Element("Silicium", "Si", 14));
-		map.put(15, new Element("Phosphorus", "P", 15));
-		map.put(16, new Element("Sulfur", "S", 16));
-		map.put(17, new Element("Chlorine", "Cl", 17));
-		map.put(18, new Element("Argon", "Ar", 18));
-		map.put(19, new Element("Potassium", "K", 19));
-		map.put(20, new Element("Calcium", "Ca", 20));
-		map.put(21, new Element("Scandium", "Sc", 21));
-		map.put(22, new Element("Titanium", "Ti", 22));
-		map.put(23, new Element("Vanadium", "V", 23));
-		map.put(24, new Element("Chromium", "Cr", 24));
-		map.put(25, new Element("Manganese", "Mn", 25));
-		map.put(26, new Element("Iron", "Fe", 26));
-		map.put(27, new Element("Cobalt", "Co", 27));
-		map.put(28, new Element("Nickel", "Ni", 28));
-		map.put(29, new Element("Copper", "Cu", 29));
-		map.put(30, new Element("Zinc", "Zn", 30));
-		map.put(31, new Element("Gallium", "Ga", 31));
-		map.put(32, new Element("Germanium", "Ge", 32));
-		map.put(33, new Element("Arsenic", "As", 33));
-		map.put(34, new Element("Selenium", "Se", 34));
-		map.put(35, new Element("Bromine", "Br", 35));
-		map.put(36, new Element("Krypton", "Kr", 36));
-		map.put(37, new Element("Rubidium", "Rb", 37));
-		map.put(38, new Element("Strontium", "Sr", 38));
-		map.put(39, new Element("Yttrium", "Y", 39));
-		map.put(40, new Element("Zirconium", "Zr", 40));
-		map.put(41, new Element("Niobium", "Nb", 41));
-		map.put(42, new Element("Molybdenum", "Mo", 42));
-		map.put(43, new Element("Technetium", "Tc", 43));
-		map.put(44, new Element("Ruthenium", "Ru", 44));
-		map.put(45, new Element("Rhodium", "Rh", 45));
-		map.put(46, new Element("Palladium", "Pd", 46));
-		map.put(47, new Element("Silver", "Ag", 47));
-		map.put(48, new Element("Cadmium", "Cd", 48));
-		map.put(49, new Element("Indium", "In", 49));
-		map.put(50, new Element("Tin", "Sn", 50));
-		map.put(51, new Element("Antimony", "Sb", 51));
-		map.put(52, new Element("Tellurium", "Te", 52));
-		map.put(53, new Element("Iodine", "I", 53));
-		map.put(54, new Element("Xenon", "Xe", 54));
+		list.add(new Element("Hydrogen", "H", 1));
+		list.add(new Element("Helium", "He", 2));
+		list.add(new Element("Lithium", "Li", 3));
+		list.add(new Element("Berylium", "Be", 4));
+		list.add(new Element("Boron", "B", 5));
+		list.add(new Element("Carbon", "C", 6));
+		list.add(new Element("Nitrogen", "N", 7));
+		list.add(new Element("Oxygen", "O", 8));
+		list.add(new Element("Fluorine", "F", 9));
+		list.add(new Element("Neon", "Ne", 10));
+		list.add(new Element("Sodium", "Na", 11));
+		list.add(new Element("Magnesium", "Mg", 12));
+		list.add(new Element("Aluminium", "Al", 13));
+		list.add(new Element("Silicium", "Si", 14));
+		list.add(new Element("Phosphorus", "P", 15));
+		list.add(new Element("Sulfur", "S", 16));
+		list.add(new Element("Chlorine", "Cl", 17));
+		list.add(new Element("Argon", "Ar", 18));
+		list.add(new Element("Potassium", "K", 19));
+		list.add(new Element("Calcium", "Ca", 20));
+		list.add(new Element("Scandium", "Sc", 21));
+		list.add(new Element("Titanium", "Ti", 22));
+		list.add(new Element("Vanadium", "V", 23));
+		list.add(new Element("Chromium", "Cr", 24));
+		list.add(new Element("Manganese", "Mn", 25));
+		list.add(new Element("Iron", "Fe", 26));
+		list.add(new Element("Cobalt", "Co", 27));
+		list.add(new Element("Nickel", "Ni", 28));
+		list.add(new Element("Copper", "Cu", 29));
+		list.add(new Element("Zinc", "Zn", 30));
+		list.add(new Element("Gallium", "Ga", 31));
+		list.add(new Element("Germanium", "Ge", 32));
+		list.add(new Element("Arsenic", "As", 33));
+		list.add(new Element("Selenium", "Se", 34));
+		list.add(new Element("Bromine", "Br", 35));
+		list.add(new Element("Krypton", "Kr", 36));
+		list.add(new Element("Rubidium", "Rb", 37));
+		list.add(new Element("Strontium", "Sr", 38));
+		list.add(new Element("Yttrium", "Y", 39));
+		list.add(new Element("Zirconium", "Zr", 40));
+		list.add(new Element("Niobium", "Nb", 41));
+		list.add(new Element("Molybdenum", "Mo", 42));
+		list.add(new Element("Technetium", "Tc", 43));
+		list.add(new Element("Ruthenium", "Ru", 44));
+		list.add(new Element("Rhodium", "Rh", 45));
+		list.add(new Element("Palladium", "Pd", 46));
+		list.add(new Element("Silver", "Ag", 47));
+		list.add(new Element("Cadmium", "Cd", 48));
+		list.add(new Element("Indium", "In", 49));
+		list.add(new Element("Tin", "Sn", 50));
+		list.add(new Element("Antimony", "Sb", 51));
+		list.add(new Element("Tellurium", "Te", 52));
+		list.add(new Element("Iodine", "I", 53));
+		list.add(new Element("Xenon", "Xe", 54));
 	}
 	
-	public HashMap<Integer, Element> getMap() {
-		return map;
+	public ArrayList<Element> getList() {
+		return list;
+	}
+	
+	public Element searchElemByName(String name) {
+		for (Element e : list) {
+			if (e.getName().equals(name))
+				return e;
+		}
+		return null;
+	}
+	
+	public Element searchElemBySymbol(String symbol) {
+		for (Element e : list) {
+			if (e.getSymbol().equals(symbol))
+				return e;
+		}
+		return null;
+	}
+	
+	public Element searchElemByProtons(Integer protons) {
+		for (Element e : list) {
+			if (e.getProtons() == protons)
+				return e;
+		}
+		return null;
 	}
 }

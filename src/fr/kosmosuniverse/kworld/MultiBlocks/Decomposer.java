@@ -1,7 +1,6 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -19,9 +18,10 @@ import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.MultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.Pattern;
 import fr.kosmosuniverse.kworld.commands.KGive;
-import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
+import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Compose;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
+import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public class Decomposer extends IMultiBlock{
 	
@@ -168,7 +168,7 @@ public class Decomposer extends IMultiBlock{
 	}
 
 	@Override
-	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
+	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols) {
 		if (type == ActivationType.ASSEMBLE) {
 			player.sendMessage("You just constructed Decomposer !");
 		}
@@ -182,7 +182,7 @@ public class Decomposer extends IMultiBlock{
 			if ((item = checkChest(chest, player)) == null)
 				return ;
 			
-			if ((mol = createMolecule(item, Mols)) == null) {
+			if ((mol = Mols.duplicateMoleculeByItem(item)) == null) {
 				player.sendMessage("[KWorld] : You need to put only Molecules in the Decomposer !");
 				return ;
 			}
@@ -230,19 +230,4 @@ public class Decomposer extends IMultiBlock{
 		
 		return decomp;
 	}
-	
-	private Molecule createMolecule(ItemStack item, ArrayList<Molecule> Mols) {
-		if (item == null || !item.hasItemMeta() || !item.getItemMeta().hasDisplayName()) {
-			return null;
-		}
-		
-		ItemStack sample = KGive.itemMultiplier(item, 1);
-		
-		for (Molecule m : Mols) {
-			if (m.getMol().equals(sample))
-				return m;
-		}
-		
-		return null;
-	}	
 }

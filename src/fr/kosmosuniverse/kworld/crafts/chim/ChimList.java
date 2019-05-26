@@ -1,25 +1,26 @@
 package fr.kosmosuniverse.kworld.crafts.chim;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.inventory.ItemStack;
 
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
+import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
+import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public class ChimList {
 	
 	private HashMap<String, ItemStack> chimMap;
 	
-	public ChimList(HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
+	public ChimList(Elements Elems, Molecules Mols) {
 		chimMap = new HashMap<String, ItemStack>();
 		
-		for (Integer i : Elems.keySet()) {
-			chimMap.put(Elems.get(i).getName(), Elems.get(i).getElem());
+		for (Element e : Elems.getList()) {
+			chimMap.put(e.getName(), e.getElem());
 		}
 		
-		for (Molecule m : Mols) {
+		for (Molecule m : Mols.getList()) {
 			chimMap.put(m.getName(), m.getMol());
 		}
 		

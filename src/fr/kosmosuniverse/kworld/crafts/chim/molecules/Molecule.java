@@ -80,4 +80,17 @@ public class Molecule {
 		
 		return true;
 	}
+	
+	public boolean checkCompose(Compose[] comp) {
+		
+		if (compose.toArray().length != comp.length)
+			return false;
+		
+		for (Integer i = 0; i < compose.size(); i++) {
+			if (compose.get(i) != comp[i])
+				return false;
+		}
+		
+		return true;
+	}
 }

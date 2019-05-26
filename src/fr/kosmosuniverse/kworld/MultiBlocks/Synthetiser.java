@@ -1,7 +1,6 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,8 +15,8 @@ import fr.kosmosuniverse.kworld.MultiBlocks.utils.ActivationType;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.MultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.Pattern;
-import fr.kosmosuniverse.kworld.crafts.chim.elements.Element;
-import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
+import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public class Synthetiser extends IMultiBlock {
 
@@ -167,7 +166,7 @@ public class Synthetiser extends IMultiBlock {
 	}
 
 	@Override
-	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, HashMap<Integer, Element> Elems, ArrayList<Molecule> Mols) {
+	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols) {
 		if (type == ActivationType.ASSEMBLE) {
 			player.sendMessage("You just constructed Synthetiser !");
 		}
