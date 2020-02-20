@@ -27,14 +27,14 @@ public class Molecule {
 			this.elems.add(c.elem);
 		}
 		
-		item = new ItemStack(Material.GLASS_BOTTLE);
+		this.item = new ItemStack(Material.GLASS_BOTTLE);
 		
 		ItemMeta itM = item.getItemMeta();
 		
 		itM.setDisplayName("§c" + this.name);
 		itM.setLore(Arrays.asList("Compose : " + this.symbols));
 		
-		item.setItemMeta(itM);
+		this.item.setItemMeta(itM);
 	}
 	
 	public Molecule(Molecule mol) {

@@ -9,6 +9,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.equivalence.MMEquivalence;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public abstract class IMultiBlock {
@@ -16,7 +17,7 @@ public abstract class IMultiBlock {
 	protected MultiBlock multiblock;
 	protected ArrayList<Inventory> invs;
 	
-	public abstract void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols);
+	public abstract void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols, MMEquivalence Equiv);
 	public abstract void createInventories();
 	
 	public Inventory getInventory(Inventory before, Material material, Inventory upInv) {

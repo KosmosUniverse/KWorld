@@ -17,6 +17,7 @@ import fr.kosmosuniverse.kworld.MultiBlocks.utils.ActivationType;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.IMultiBlock;
 import fr.kosmosuniverse.kworld.crafts.chim.ChimActivator;
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.equivalence.MMEquivalence;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 
 public class MultiBlockListener implements Listener {
@@ -26,14 +27,16 @@ public class MultiBlockListener implements Listener {
 	
 	private Elements Elems;
 	private Molecules Mols;
+	private MMEquivalence Equiv;
 	
-	public MultiBlockListener(Plugin _plugin, ArrayList<IMultiBlock> MBList, Elements Elems, Molecules Mols) {
+	public MultiBlockListener(Plugin _plugin, ArrayList<IMultiBlock> MBList, Elements Elems, Molecules Mols, MMEquivalence Equiv) {
 		Cores = new ArrayList<Material>();
 		
 		this.plugin = _plugin;
 		this.MBList = MBList;
 		this.Elems = Elems;
 		this.Mols = Mols;
+		this.Equiv = Equiv;
 		
 		this.MBList.add(new Decomposer());
 		this.MBList.add(new Synthetiser());
@@ -55,7 +58,7 @@ public class MultiBlockListener implements Listener {
 		for (IMultiBlock mb : this.MBList) {
 			if (mb.getMultiblock().getCore() == block.getType()) {
 				if (mb.getMultiblock().checkMultiBlock(block.getLocation(), player)) {
-					mb.onActivate(this.plugin, player, block, ActivationType.ASSEMBLE, this.Elems, this.Mols);
+					mb.onActivate(this.plugin, player, block, ActivationType.ASSEMBLE, this.Elems, this.Mols, this.Equiv);
 					return ;
 				}
 			}
@@ -83,7 +86,7 @@ public class MultiBlockListener implements Listener {
 		for (IMultiBlock mb : this.MBList) {
 			if (mb.getMultiblock().getCore() == block.getType()) {
 				if (mb.getMultiblock().checkMultiBlock(block.getLocation(), player)) {
-					mb.onActivate(this.plugin, player, block, ActivationType.ACTIVATE, this.Elems, this.Mols);
+					mb.onActivate(this.plugin, player, block, ActivationType.ACTIVATE, this.Elems, this.Mols, this.Equiv);
 					return ;
 				}
 			}

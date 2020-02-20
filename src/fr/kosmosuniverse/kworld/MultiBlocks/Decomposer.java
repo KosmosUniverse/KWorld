@@ -19,6 +19,8 @@ import fr.kosmosuniverse.kworld.MultiBlocks.utils.MultiBlock;
 import fr.kosmosuniverse.kworld.MultiBlocks.utils.Pattern;
 import fr.kosmosuniverse.kworld.commands.KGive;
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.equivalence.ComposeIN;
+import fr.kosmosuniverse.kworld.crafts.chim.equivalence.MMEquivalence;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Compose;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecule;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
@@ -168,7 +170,7 @@ public class Decomposer extends IMultiBlock{
 	}
 
 	@Override
-	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols) {
+	public void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols, MMEquivalence Equiv) {
 		if (type == ActivationType.ASSEMBLE) {
 			player.sendMessage("You just constructed Decomposer !");
 		}
@@ -177,29 +179,47 @@ public class Decomposer extends IMultiBlock{
 			
 			Chest chest = (Chest) block.getLocation().getBlock().getRelative(0, 1, 0).getState();
 			ItemStack item;
-			Molecule mol;
+			Molecule mol = null;
+			ComposeIN[] comp = null;
 			
-			if ((item = checkChest(chest, player)) == null)
+			if ((item = checkChest(chest, player, Equiv)) == null)
 				return ;
 			
-			if ((mol = Mols.duplicateMoleculeByItem(item)) == null) {
-				player.sendMessage("[KWorld] : You need to put only Molecules in the Decomposer !");
-				return ;
+			
+			if (item.getType().equals(Material.GLASS_BOTTLE)) {
+				if ((mol = Mols.duplicateMoleculeByItem(item)) == null) {
+					player.sendMessage("[KWorld] : You need to put only available Molecules in the Decomposer !");
+					return ;
+				}
+			}
+			else {
+				if ((comp = Equiv.getItemsByMaterial(item.getType())) == null) {
+					player.sendMessage("[KWorld] : This is impossible.");
+					return ;
+				}
+					
 			}
 			
 			Inventory inv = chest.getInventory();
 			Integer count = item.getAmount();
-			
 			inv.clear();
-			for (Compose c : mol.getCompose()) {
-				inv.addItem(KGive.itemMultiplier(c.elem.getElem(), c.number * count));
+			
+			if (item.getType().equals(Material.GLASS_BOTTLE)) {
+				for (Compose c : mol.getCompose()) {
+					inv.addItem(KGive.itemMultiplier(c.elem.getElem(), c.number * count));
+				}
+			}
+			else {
+				for (ComposeIN c : comp) {
+					inv.addItem(KGive.itemMultiplier(c.item, c.nb * count));
+				}
 			}
 			
 			player.playSound(player.getLocation(), Sound.ENTITY_LIGHTNING_BOLT_THUNDER, 4f, 4f);
 		}
 	}
 
-	private ItemStack checkChest(Chest chest, Player player) {
+	private ItemStack checkChest(Chest chest, Player player, MMEquivalence Equiv) {
 		Inventory inv = chest.getInventory();
 		ItemStack decomp = null;
 
@@ -215,16 +235,16 @@ public class Decomposer extends IMultiBlock{
 			return null;
 		}
 		else if (i > 1) {
-			player.sendMessage("[KWorld] : For now, just put one type of Molecule !");
+			player.sendMessage("[KWorld] : For now, just put one type of item !");
 			return null;
 		}
 		
 		for (ItemStack item : inv.getContents()) {
-			if (item != null && item.getType() != Material.GLASS_BOTTLE) {
-				player.sendMessage("[KWorld] : For now, you need to put a Molecule only !");
+			if (item != null && item.getType() != Material.GLASS_BOTTLE && !Equiv.checkMaterial(item.getType())) {
+				player.sendMessage("[KWorld] : For now, you need to put a Molecule or a natural Material only !");
 				return null;
 			}
-			if (item != null && item.getType() == Material.GLASS_BOTTLE)
+			if (item != null && (item.getType() == Material.GLASS_BOTTLE || Equiv.checkMaterial(item.getType())))
 				decomp = item;
 		}
 		

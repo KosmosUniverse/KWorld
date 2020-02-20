@@ -17,6 +17,8 @@ import fr.kosmosuniverse.kworld.crafts.AddRecipes;
 import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
 import fr.kosmosuniverse.kworld.crafts.chim.ChimList;
 import fr.kosmosuniverse.kworld.crafts.chim.elements.Elements;
+import fr.kosmosuniverse.kworld.crafts.chim.equivalence.MMEquivalence;
+import fr.kosmosuniverse.kworld.crafts.chim.essences.Essences;
 import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 import fr.kosmosuniverse.kworld.crafts.fun.FunList;
 import fr.kosmosuniverse.kworld.crafts.fun.xp.XpStorageListener;
@@ -25,9 +27,11 @@ public class KWorldMain extends JavaPlugin {
 	
 	private Elements Elems = new Elements();
 	private Molecules Mols = new Molecules(this, Elems);
+	private Essences Ess = new Essences(this, Mols);
+	private MMEquivalence Equiv = new MMEquivalence(Mols);
 	private ArrayList<IMultiBlock> MBList = new MultiBlockList().getList();
 	private FunList funItems = new FunList(this);
-	private ChimList chimItems = new ChimList(Elems, Mols);
+	private ChimList chimItems = new ChimList(this, Elems, Mols, Ess);
 	
 	@Override
 	public void onEnable() {
@@ -44,7 +48,7 @@ public class KWorldMain extends JavaPlugin {
 			getServer().getPluginManager().registerEvents(new XpStorageListener(/*this*/), this);	
 		}
 		if (KChim) {
-			getServer().getPluginManager().registerEvents(new MultiBlockListener(this, MBList, Elems, Mols), this);
+			getServer().getPluginManager().registerEvents(new MultiBlockListener(this, MBList, Elems, Mols, Equiv), this);
 			getCommand("kspawn").setExecutor(new KSpawn(this.MBList));
 			getCommand("kspawn").setTabCompleter(new KSpawnTab(this.MBList));
 		}
