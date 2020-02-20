@@ -17,7 +17,6 @@ public class ChimActivator {
 
 	private KWorldMain main;
 	private ShapedRecipe activator;
-	private int a = 0;
 	
 	public ChimActivator(KWorldMain main) {
 		this.main = main;
