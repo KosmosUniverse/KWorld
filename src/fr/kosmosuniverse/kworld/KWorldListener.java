@@ -12,8 +12,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import fr.kosmosuniverse.kworld.crafts.InventoryRecipeListener;
-
 public class KWorldListener implements Listener {
 
 	private KWorldMain main;
@@ -52,7 +50,7 @@ public class KWorldListener implements Listener {
 				item.getItemMeta().hasDisplayName() &&
 				item.getItemMeta().getDisplayName().equals("§6§l§nKWorld Guide")) {
 
-			player.openInventory(InventoryRecipeListener.getGuideInventory());
+			player.openInventory(this.main.invs.get("§8Guide"));
 		}
 	}
 }

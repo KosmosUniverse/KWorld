@@ -2,7 +2,9 @@ package fr.kosmosuniverse.kworld;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import fr.kosmosuniverse.kworld.MultiBlocks.MultiBlockList;
@@ -29,9 +31,11 @@ public class KWorldMain extends JavaPlugin {
 	private Molecules Mols = new Molecules(this, Elems);
 	private Essences Ess = new Essences(this, Mols);
 	private MMEquivalence Equiv = new MMEquivalence(Mols);
-	private ArrayList<IMultiBlock> MBList = new MultiBlockList().getList();
-	private FunList funItems = new FunList(this);
+	public ArrayList<IMultiBlock> MBList = new MultiBlockList().getList();
+	public FunList funItems = new FunList(this);
 	private ChimList chimItems = new ChimList(this, Elems, Mols, Ess);
+	public HashMap<String, Inventory> invs = new HashMap<String, Inventory>();
+	public HashMap<String, Runnable> invsActions = new HashMap<String, Runnable>();
 	
 	@Override
 	public void onEnable() {

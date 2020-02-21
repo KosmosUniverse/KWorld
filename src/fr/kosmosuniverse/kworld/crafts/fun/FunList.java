@@ -65,7 +65,7 @@ public class FunList {
 			for (ShapedRecipe s : a.getRecipes()) {
 				recipeList.add(s);
 			}
-		}	
+		}
 	}
 	
 	public ArrayList<AStick3T> getStickList() {
@@ -78,5 +78,13 @@ public class FunList {
 	
 	public ArrayList<ShapedRecipe> getRecipes() {
 		return recipeList;
+	}
+	
+	public ExpBottle getExpBottle() {
+		return expBot;
+	}
+	
+	public XpStorage getXpStorage() {
+		return xpStore;
 	}
 }

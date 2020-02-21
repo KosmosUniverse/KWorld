@@ -16,7 +16,7 @@ public class FireStick extends AStick3T{
 	
 	@Override
 	public void StickInventory() {
-		this.inv = Bukkit.createInventory(null, 54, "§8Fire Stick");
+		this.inv = Bukkit.createInventory(null, 54);
 		
 		this.inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		

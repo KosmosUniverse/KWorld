@@ -1,6 +1,6 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -29,7 +29,7 @@ public class Decomposer extends IMultiBlock{
 	
 	public Decomposer() {
 		this.name = "Decomposer";
-		this.invs = new ArrayList<Inventory>();
+		this.invs = new HashMap<Integer, Inventory>();
 		createInventories();
 		this.multiblock = new MultiBlock(Material.CHISELED_STONE_BRICKS,
 				new Pattern(Material.STONE_BRICKS, -1, -1, -1),
@@ -97,7 +97,7 @@ public class Decomposer extends IMultiBlock{
 		inv.setItem(31, new ItemStack(Material.STONE_BRICKS));
 		inv.setItem(32, new ItemStack(Material.STONE_BRICKS));
 		
-		this.invs.add(inv);
+		this.invs.put(1, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Decomposer Layer 2");
 		
@@ -110,7 +110,7 @@ public class Decomposer extends IMultiBlock{
 		inv.setItem(42, new ItemStack(Material.DARK_OAK_LOG));
 		inv.setItem(22, new ItemBuilder(Material.CHISELED_STONE_BRICKS, "Chiseled Stone Brick §cCore").getItem());
 		
-		this.invs.add(inv);
+		this.invs.put(2, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Decomposer Layer 3");
 		
@@ -123,7 +123,7 @@ public class Decomposer extends IMultiBlock{
 		inv.setItem(42, new ItemStack(Material.DARK_OAK_LOG));
 		inv.setItem(22, new ItemStack(Material.CHEST));
 		
-		this.invs.add(inv);
+		this.invs.put(3, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Decomposer Layer 4");
 		
@@ -136,7 +136,7 @@ public class Decomposer extends IMultiBlock{
 		inv.setItem(42, new ItemStack(Material.DARK_OAK_LOG));
 		inv.setItem(22, new ItemStack(Material.IRON_BARS));
 		
-		this.invs.add(inv);
+		this.invs.put(4, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Decomposer Layer 5");
 		
@@ -166,7 +166,7 @@ public class Decomposer extends IMultiBlock{
 		inv.setItem(23, new ItemStack(Material.IRON_BARS));
 		inv.setItem(31, new ItemStack(Material.IRON_BARS));
 		
-		this.invs.add(inv);
+		this.invs.put(5, inv);
 	}
 
 	@Override

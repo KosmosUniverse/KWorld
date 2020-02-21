@@ -1,8 +1,7 @@
 package fr.kosmosuniverse.kworld.MultiBlocks.utils;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -15,13 +14,13 @@ import fr.kosmosuniverse.kworld.crafts.chim.molecules.Molecules;
 public abstract class IMultiBlock {
 	protected String name;
 	protected MultiBlock multiblock;
-	protected ArrayList<Inventory> invs;
+	protected HashMap<Integer, Inventory> invs;
 	
 	public abstract void onActivate(Plugin plugin, Player player, Block block, ActivationType type, Elements Elems, Molecules Mols, MMEquivalence Equiv);
 	public abstract void createInventories();
 	
-	public Inventory getInventory(Inventory before, Material material, Inventory upInv) {
-		int i = 0;
+	public HashMap<Integer, Inventory> getInventory() {
+/*		int i = 0;
 		boolean found = false;
 		
 		for (Inventory tmp : this.invs) {
@@ -42,7 +41,8 @@ public abstract class IMultiBlock {
 				return this.invs.get(i - 1);
 			return upInv;
 		}
-		return before;
+		return before;*/
+		return invs;
 	}
 	
 	public String getName() {

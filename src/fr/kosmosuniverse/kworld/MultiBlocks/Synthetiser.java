@@ -1,6 +1,6 @@
 package fr.kosmosuniverse.kworld.MultiBlocks;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -23,7 +23,7 @@ public class Synthetiser extends IMultiBlock {
 
 	public Synthetiser() {
 		this.name = "Synthetiser";
-		this.invs = new ArrayList<Inventory>();
+		this.invs = new HashMap<Integer, Inventory>();
 		createInventories();
 		this.multiblock = new MultiBlock(Material.CHISELED_QUARTZ_BLOCK,
 				new Pattern(Material.QUARTZ_BLOCK, -1, -1, -1),
@@ -93,7 +93,7 @@ public class Synthetiser extends IMultiBlock {
 		inv.setItem(31, new ItemStack(Material.QUARTZ_BLOCK));
 		inv.setItem(32, new ItemStack(Material.QUARTZ_BLOCK));
 		
-		this.invs.add(inv);
+		this.invs.put(1, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 2");
 		
@@ -106,7 +106,7 @@ public class Synthetiser extends IMultiBlock {
 		inv.setItem(42, new ItemStack(Material.QUARTZ_PILLAR));
 		inv.setItem(22, new ItemBuilder(Material.CHISELED_QUARTZ_BLOCK, "Chiseled Quartz Block §cCore").getItem());
 		
-		this.invs.add(inv);
+		this.invs.put(2, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 3");
 		
@@ -123,7 +123,7 @@ public class Synthetiser extends IMultiBlock {
 		inv.setItem(42, new ItemStack(Material.QUARTZ_PILLAR));
 		inv.setItem(22, new ItemStack(Material.CHEST));
 		
-		this.invs.add(inv);
+		this.invs.put(3, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 4");
 		
@@ -139,7 +139,7 @@ public class Synthetiser extends IMultiBlock {
 		inv.setItem(38, new ItemStack(Material.QUARTZ_PILLAR));
 		inv.setItem(42, new ItemStack(Material.QUARTZ_PILLAR));
 		
-		this.invs.add(inv);
+		this.invs.put(4, inv);
 		
 		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 5");
 		
@@ -163,7 +163,7 @@ public class Synthetiser extends IMultiBlock {
 		inv.setItem(40, new ItemStack(Material.QUARTZ_PILLAR));
 		inv.setItem(41, new ItemStack(Material.QUARTZ_PILLAR));
 				
-		this.invs.add(inv);
+		this.invs.put(5, inv);
 	}
 
 	@Override
