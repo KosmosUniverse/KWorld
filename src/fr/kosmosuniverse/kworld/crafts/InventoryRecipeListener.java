@@ -53,7 +53,7 @@ public class InventoryRecipeListener implements Listener {
 		smallInv = Bukkit.createInventory(null, 27);
 		smallInv.setItem(0, new ItemBuilder(Material.CHISELED_STONE_BRICKS, "Decomposer").getItem());
 		smallInv.setItem(1, new ItemBuilder(Material.CHISELED_QUARTZ_BLOCK, "Synthetiser").getItem());
-		smallInv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
+		smallInv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack to Menu <-", 1).getItem());
 		this.main.invs.put("§8MultiBlocks", smallInv);
 		this.main.invsActions.put("§8MultiBlocks", () -> multiblocksClick());
 		
@@ -63,8 +63,16 @@ public class InventoryRecipeListener implements Listener {
 			this.main.invsActions.put(a.getColor() + a.getName(), () -> stickClick());
 		}
 		
-		this.main.invs.put("§8XP Bottle", ExpBottle.getExpBottleRecipe());
-		this.main.invsActions.put("§8XP Bottle", () -> xpBottleClick());
+		this.main.invs.put("§8XPBottle", ExpBottle.getExpBottleRecipe());
+		this.main.invsActions.put("§8XPBottle", () -> xpBottleClick());
+		
+		this.main.invs.put("§8Activator", ChimActivator.getActivatorRecipe());
+		this.main.invsActions.put("§8Activator", () -> activatorClick());
+		
+		for (int i : this.main.funItems.getXpStorage().getXpStorageRecipe().keySet()) {
+			this.main.invs.put("§8XPStorage_" + i, this.main.funItems.getXpStorage().getXpStorageRecipe().get(i));
+			this.main.invsActions.put("§8XPStorage_" + i, () -> xpstorageClick());
+		}
 		
 		for (IMultiBlock mb : this.main.MBList) {
 			int cnt = 1;
@@ -99,16 +107,16 @@ public class InventoryRecipeListener implements Listener {
 			player.openInventory(this.main.invs.get("§8Guide"));
 			break;
 		case EXPERIENCE_BOTTLE:
-			player.openInventory(ExpBottle.getExpBottleRecipe());
+			player.openInventory(this.main.invs.get("§8XPBottle"));
 			break;
 		case STICK:
 			player.openInventory(this.main.invs.get(item.getItemMeta().getDisplayName()));
 			break;
 		case EMERALD:
-			player.openInventory(XpStorage.getXpStorageRecipe());
+			player.openInventory(this.main.invs.get("§8XPStorage_1"));
 			break;
 		case END_ROD:
-			player.openInventory(ChimActivator.getActivatorRecipe());
+			player.openInventory(this.main.invs.get("§8Activator"));
 			break;
 		default:
 			break;
@@ -118,13 +126,16 @@ public class InventoryRecipeListener implements Listener {
 	private void multiblocksClick() {
 		switch (item.getType()) {
 		case BARRIER:
-			if (item.getItemMeta().getDisplayName().contains("Back"))
+			if (item.getItemMeta().getDisplayName().contains("Menu"))
+				player.openInventory(this.main.invs.get("§8Guide"));
+			else if (item.getItemMeta().getDisplayName().contains("Back"))
 				player.openInventory(this.main.invs.get("§8MultiBlocks"));
 			else {
-				for (String s : this.main.invs.keySet())
+				for (String s : this.main.invs.keySet()) {
 					if (this.main.invs.get(s).equals(inv)) {
 						player.openInventory(this.main.invs.get(getPreviousNum(s)));	
 					}
+				}
 			}
 			break ;
 		case CHISELED_STONE_BRICKS:
@@ -134,10 +145,11 @@ public class InventoryRecipeListener implements Listener {
 			player.openInventory(this.main.invs.get("§8Synthetiser_1"));
 			break ;
 		case LIME_STAINED_GLASS_PANE:
-			for (String s : this.main.invs.keySet())
+			for (String s : this.main.invs.keySet()) {
 				if (this.main.invs.get(s).equals(inv)) {
 					player.openInventory(this.main.invs.get(getNextNum(s)));	
 				}
+			}
 			break;
 		default:
 			break ;
@@ -166,50 +178,45 @@ public class InventoryRecipeListener implements Listener {
 		return s;
 	}
 	
-	public void stickClick() {
+	private void stickClick() {
 		if (item.getType() == Material.BARRIER)
 			player.openInventory(this.main.invs.get("§8Crafts"));
 	}
 	
-	public void xpBottleClick() {
+	private void activatorClick() {
 		if (item.getType() == Material.BARRIER)
 			player.openInventory(this.main.invs.get("§8Crafts"));
 	}
-
-/*	public static Inventory getGuideInventory() {
-		Inventory inv = Bukkit.createInventory(null, 54, "§8Guide");
-		
-		inv.setItem(20, new ItemBuilder(Material.CRAFTING_TABLE, "§eWORKBENCH RECIPES").getItem());
-		inv.setItem(21, new ItemBuilder(Material.FURNACE, "§eFURNACE RECIPES").getItem());
-		inv.setItem(22, new ItemBuilder(Material.CHEST, "§eMultiBlocks").getItem());
-		
-		return inv;
-	}*/
 	
-/*	public Inventory getCraftsInventory() {
-		Inventory inv = Bukkit.createInventory(null, 27);
-		
-		inv.setItem(0, new ItemStack(Material.EXPERIENCE_BOTTLE));
-		inv.setItem(1, new FireStick(this.main).StickSample());
-		inv.setItem(2, new WindStick(this.main).StickSample());
-		inv.setItem(3, new EarthStick(this.main).StickSample());
-		inv.setItem(4, new WaterStick(this.main).StickSample());
-		inv.setItem(5, XpStorage.xpStorageSampleBuilder());
-		inv.setItem(6, ChimActivator.ActivatorBuilder());
-		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
-		
-		return inv;
-	}*/
+	private void xpBottleClick() {
+		if (item.getType() == Material.BARRIER)
+			player.openInventory(this.main.invs.get("§8Crafts"));
+	}
 	
-/*	public static Inventory getMultiBlockInventory() {
-		Inventory inv = Bukkit.createInventory(null, 27, "§8MultiBlocks");
-		
-		inv.setItem(0, new ItemBuilder(Material.CHISELED_STONE_BRICKS, "Decomposer").getItem());
-		inv.setItem(1, new ItemBuilder(Material.CHISELED_QUARTZ_BLOCK, "Synthetiser").getItem());
-		inv.setItem(26, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
-		
-		return inv;
-	}*/
+	private void xpstorageClick() {
+		switch (item.getType()) {
+		case BARRIER:
+			if (item.getItemMeta().getDisplayName().contains("Back"))
+				player.openInventory(this.main.invs.get("§8Crafts"));
+			else {
+				for (String s : this.main.invs.keySet()) {
+					if (this.main.invs.get(s).equals(inv)) {
+						player.openInventory(this.main.invs.get(getPreviousNum(s)));	
+					}
+				}
+			}
+			break ;
+		case LIME_STAINED_GLASS_PANE:
+			for (String s : this.main.invs.keySet()) {
+				if (this.main.invs.get(s).equals(inv)) {
+					player.openInventory(this.main.invs.get(getNextNum(s)));	
+				}
+			}
+			break;
+		default:
+			break ;
+		}
+	}
 	
 	@EventHandler
 	public void onGuideClick(InventoryClickEvent event) {
@@ -219,170 +226,15 @@ public class InventoryRecipeListener implements Listener {
 		
 		if (item == null)
 			return ;
-		event.setCancelled(true);
+		
 		if (this.main.invs.containsValue(inv)) {
 			for (String s : this.main.invs.keySet()) {
-				if (this.main.invs.get(s).equals(inv))
+				if (this.main.invs.get(s).equals(inv)) {
+					event.setCancelled(true);
 					this.main.invsActions.get(s).run();
+					inv = null;
+				}
 			}
 		}
 	}
-/*	
-	@EventHandler
-	public void onCraftClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (!inv.getName().equals("§8Craft"))
-			return ;
-		event.setCancelled(true);
-		
-		Inventory newInv = null;
-		
-		switch (item.getType()) {
-		case BARRIER:
-			player.openInventory(getGuideInventory());
-			break;
-		case EXPERIENCE_BOTTLE:
-			newInv = ExpBottle.getExpBottleRecipe();
-			player.openInventory(newInv);
-			break;
-		case STICK:
-			if (item.getItemMeta().getDisplayName().equals("§cFIRE"))
-				newInv = new FireStick(this.main).getInventory();
-			else if (item.getItemMeta().getDisplayName().equals("§bWIND"))
-				newInv = new WindStick(this.main).getInventory();
-			else if (item.getItemMeta().getDisplayName().equals("§aEARTH"))
-				newInv = new EarthStick(this.main).getInventory();
-			else if (item.getItemMeta().getDisplayName().equals("§1WATER"))
-				newInv = new WaterStick(this.main).getInventory();
-			player.openInventory(newInv);
-			break;
-		case EMERALD:
-			newInv = XpStorage.getXpStorageRecipe();
-			player.openInventory(newInv);
-			break;
-		case END_ROD:
-			newInv = ChimActivator.getActivatorRecipe();
-			player.openInventory(newInv);
-			break;
-		default:
-			break;
-		}
-	}
-	*/
-	/*@EventHandler
-	public void onMultiBlockClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (inv.getName().equals("§8MultiBlocks")) {
-			event.setCancelled(true);
-			switch (item.getType()) {
-			case BARRIER:
-				player.openInventory(getGuideInventory());
-				break ;
-			case CHISELED_STONE_BRICKS:
-				player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
-				break ;
-			case CHISELED_QUARTZ_BLOCK:
-				player.openInventory(new Synthetiser().getInventory(inv, item.getType(), getMultiBlockInventory()));
-				break ;
-			default:
-				break ;
-			}
-			return ;
-		}
-		
-		else if (!inv.getName().contains("§8[MultiBlock]"))
-			return ;
-		
-		event.setCancelled(true);
-		
-		if (inv.getName().contains("Decomposer"))
-			player.openInventory(new Decomposer().getInventory(inv, item.getType(), getMultiBlockInventory()));
-		if (inv.getName().contains("Synthetiser"))
-			player.openInventory(new Synthetiser().getInventory(inv, item.getType(), getMultiBlockInventory()));
-	}
-	*/
-/*	@EventHandler
-	public void onXpCraftClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (!inv.getName().equals("§8XP Bottle"))
-			return ;
-		event.setCancelled(true);
-		if (item.getType() == Material.BARRIER) {
-			player.openInventory(getCraftsInventory());
-		}
-	}*/
-/*	
-	@EventHandler
-	public void onStickCraftClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (inv.getName().equals("§8Fire Stick") || inv.getName().equals("§8Wind Stick") ||
-				inv.getName().equals("§8Earth Stick") || inv.getName().equals("§8Water Stick")) {
-			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER)
-				player.openInventory(getCraftsInventory());
-		}
-	}
-	*/
-/*	@EventHandler
-	public void onXpStorageCraftClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (inv.getName().equals("§8XP STORAGE 1")) {
-			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER)
-				player.openInventory(getCraftsInventory());
-			else if (item.getType() == Material.LIME_STAINED_GLASS_PANE)
-				player.openInventory(XpStorage.getXpStorageRecipe2());
-		}
-		else if (inv.getName().equals("§8XP STORAGE 2")) {
-			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER)
-				player.openInventory(XpStorage.getXpStorageRecipe());
-		}
-	}
-	
-	@EventHandler
-	public void onActivatorClick(InventoryClickEvent event) {
-		Inventory inv = event.getInventory();
-		Player player = (Player) event.getWhoClicked();
-		ItemStack item = event.getCurrentItem();
-		
-		if (item == null)
-			return ;
-		
-		if (inv.getName().equals("§8Activator")) {
-			event.setCancelled(true);
-			if (item.getType() == Material.BARRIER)
-				player.openInventory(getCraftsInventory());
-		}
-	}*/
 }

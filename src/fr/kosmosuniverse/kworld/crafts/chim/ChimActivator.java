@@ -52,11 +52,12 @@ public class ChimActivator {
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-").getItem());
 		
-		inv.setItem(4, new ItemStack(Material.TRIPWIRE_HOOK));
-		inv.setItem(12, new ItemStack(Material.BLAZE_ROD));
-		inv.setItem(13, new ItemStack(Material.END_ROD));
-		inv.setItem(14, new ItemStack(Material.BONE));
-		inv.setItem(22, new ItemStack(Material.FIREWORK_ROCKET));
+		inv.setItem(3, new ItemStack(Material.TRIPWIRE_HOOK));
+		inv.setItem(11, new ItemStack(Material.BLAZE_ROD));
+		inv.setItem(12, new ItemStack(Material.END_ROD));
+		inv.setItem(13, new ItemStack(Material.BONE));
+		inv.setItem(21, new ItemStack(Material.FIREWORK_ROCKET));
+		inv.setItem(15, ActivatorBuilder());
 		
 		return inv;
 	}

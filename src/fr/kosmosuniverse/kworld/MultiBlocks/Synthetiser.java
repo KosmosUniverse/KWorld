@@ -79,7 +79,7 @@ public class Synthetiser extends IMultiBlock {
 
 	@Override
 	public void createInventories() {
-		Inventory inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 1");
+		Inventory inv = Bukkit.createInventory(null, 45, "§8Synthetiser Layer 1");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§c<- Back").getItem());
 		inv.setItem(44, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext Layer ->").getItem());
@@ -95,7 +95,7 @@ public class Synthetiser extends IMultiBlock {
 		
 		this.invs.put(1, inv);
 		
-		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 2");
+		inv = Bukkit.createInventory(null, 45, "§8Synthetiser Layer 2");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§c<- Previous Layer").getItem());
 		inv.setItem(44, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext Layer ->").getItem());
@@ -108,7 +108,7 @@ public class Synthetiser extends IMultiBlock {
 		
 		this.invs.put(2, inv);
 		
-		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 3");
+		inv = Bukkit.createInventory(null, 45, "§8Synthetiser Layer 3");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§c<- Previous Layer").getItem());
 		inv.setItem(44, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext Layer ->").getItem());
@@ -125,7 +125,7 @@ public class Synthetiser extends IMultiBlock {
 		
 		this.invs.put(3, inv);
 		
-		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 4");
+		inv = Bukkit.createInventory(null, 45, "§8Synthetiser Layer 4");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§c<- Previous Layer").getItem());
 		inv.setItem(44, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext Layer ->").getItem());
@@ -141,7 +141,7 @@ public class Synthetiser extends IMultiBlock {
 		
 		this.invs.put(4, inv);
 		
-		inv = Bukkit.createInventory(null, 45, "§8[MultiBlock]Synthetiser Layer 5");
+		inv = Bukkit.createInventory(null, 45, "§8Synthetiser Layer 5");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§c<- Previous Layer").getItem());
 		

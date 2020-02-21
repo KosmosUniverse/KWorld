@@ -2,6 +2,7 @@ package fr.kosmosuniverse.kworld.crafts.fun.xp;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -25,6 +26,7 @@ public class XpStorage {
 	private ShapedRecipe xpStorageTierIII;
 	private ShapedRecipe xpStorageTierIV;
 	private ShapedRecipe xpStorageTierV;
+	private HashMap<Integer, Inventory> invs = new HashMap<Integer, Inventory>();
 	
 	public XpStorage(KWorldMain main) {
 		this.main = main;
@@ -119,76 +121,89 @@ public class XpStorage {
 		return item;
 	}
 	
-	public static Inventory getXpStorageRecipe() {
-		Inventory inv = Bukkit.createInventory(null, 54, "§8XP STORAGE 1");
+	public HashMap<Integer, Inventory> getXpStorageRecipe() {
+		Inventory inv = Bukkit.createInventory(null, 27, "§8XP Storage Tier I");
 		
 		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
 		inv.setItem(8, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext ->", 1).getItem());
 		
-		inv.setItem(9, new ItemStack(Material.GLASS));
-		inv.setItem(10, new ItemStack(Material.GLASS));
+		inv.setItem(2, new ItemStack(Material.GLASS));
+		inv.setItem(3, new ItemStack(Material.GLASS));
+		inv.setItem(4, new ItemStack(Material.GLASS));
 		inv.setItem(11, new ItemStack(Material.GLASS));
-		inv.setItem(18, new ItemStack(Material.GLASS));
-		inv.setItem(19, new ItemStack(Material.EXPERIENCE_BOTTLE));
-		inv.setItem(20, new ItemStack(Material.GLASS));
-		inv.setItem(27, new ItemStack(Material.GLASS));
-		inv.setItem(28, new ItemStack(Material.GLASS));
-		inv.setItem(29, new ItemStack(Material.GLASS));
-		inv.setItem(46, xpStorageBuilder(1));
-		
-		inv.setItem(12, new ItemStack(Material.GLASS));
+		inv.setItem(12, new ItemStack(Material.EXPERIENCE_BOTTLE));
 		inv.setItem(13, new ItemStack(Material.GLASS));
-		inv.setItem(14, new ItemStack(Material.GLASS));
-		inv.setItem(21, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(22, xpStorageBuilder(1));
-		inv.setItem(23, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(30, new ItemStack(Material.GLASS));
-		inv.setItem(31, new ItemStack(Material.GLASS));
-		inv.setItem(32, new ItemStack(Material.GLASS));
-		inv.setItem(49, xpStorageBuilder(2));
+		inv.setItem(20, new ItemStack(Material.GLASS));
+		inv.setItem(21, new ItemStack(Material.GLASS));
+		inv.setItem(22, new ItemStack(Material.GLASS));
+		inv.setItem(15, xpStorageBuilder(1));
+		this.invs.put(1, inv);
 		
-		inv.setItem(15, new ItemStack(Material.GLASS));
-		inv.setItem(16, new ItemStack(Material.WITHER_SKELETON_SKULL));
-		inv.setItem(17, new ItemStack(Material.GLASS));
-		inv.setItem(24, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(25, xpStorageBuilder(2));
-		inv.setItem(26, new ItemStack(Material.GHAST_TEAR));
-		inv.setItem(33, new ItemStack(Material.GLASS));
-		inv.setItem(34, new ItemStack(Material.WITHER_SKELETON_SKULL));
-		inv.setItem(35, new ItemStack(Material.GLASS));
-		inv.setItem(52, xpStorageBuilder(3));
+		inv = Bukkit.createInventory(null, 27, "§8XP Storage Tier II");
+		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cPrevious <-", 1).getItem());
+		inv.setItem(8, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext ->", 1).getItem());
 		
-		return inv;
-	}
-	
-	public static Inventory getXpStorageRecipe2() {
-		Inventory inv = Bukkit.createInventory(null, 54, "§8XP STORAGE 2");
+		inv.setItem(2, new ItemStack(Material.GLASS));
+		inv.setItem(3, new ItemStack(Material.GLASS));
+		inv.setItem(4, new ItemStack(Material.GLASS));
+		inv.setItem(11, new ItemStack(Material.GHAST_TEAR));
+		inv.setItem(12, xpStorageBuilder(1));
+		inv.setItem(13, new ItemStack(Material.GHAST_TEAR));
+		inv.setItem(20, new ItemStack(Material.GLASS));
+		inv.setItem(21, new ItemStack(Material.GLASS));
+		inv.setItem(22, new ItemStack(Material.GLASS));
+		inv.setItem(15, xpStorageBuilder(2));
+		this.invs.put(2, inv);
 		
-		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cBack <-", 1).getItem());
+		inv = Bukkit.createInventory(null, 27, "§8XP Storage Tier III");
+		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cPrevious <-", 1).getItem());
+		inv.setItem(8, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext ->", 1).getItem());
 		
-		inv.setItem(10, new ItemStack(Material.GLASS));
+		inv.setItem(2, new ItemStack(Material.GLASS));
+		inv.setItem(3, new ItemStack(Material.WITHER_SKELETON_SKULL));
+		inv.setItem(4, new ItemStack(Material.GLASS));
+		inv.setItem(11, new ItemStack(Material.GHAST_TEAR));
+		inv.setItem(12, xpStorageBuilder(2));
+		inv.setItem(13, new ItemStack(Material.GHAST_TEAR));
+		inv.setItem(20, new ItemStack(Material.GLASS));
+		inv.setItem(21, new ItemStack(Material.WITHER_SKELETON_SKULL));
+		inv.setItem(22, new ItemStack(Material.GLASS));
+		inv.setItem(15, xpStorageBuilder(3));
+		this.invs.put(3, inv);
+		
+		inv = Bukkit.createInventory(null, 27, "§8XP Storage Tier IV");
+		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cPrevious <-", 1).getItem());
+		inv.setItem(8, new ItemBuilder(Material.LIME_STAINED_GLASS_PANE, "§aNext ->", 1).getItem());
+		
+		inv.setItem(2, new ItemStack(Material.GLASS));
+		inv.setItem(3, xpStorageBuilder(3));
+		inv.setItem(4, new ItemStack(Material.GLASS));
 		inv.setItem(11, xpStorageBuilder(3));
-		inv.setItem(12, new ItemStack(Material.GLASS));
-		inv.setItem(19, xpStorageBuilder(3));
-		inv.setItem(20, new ItemStack(Material.EXPERIENCE_BOTTLE));
+		inv.setItem(12, new ItemStack(Material.EXPERIENCE_BOTTLE));
+		inv.setItem(13, xpStorageBuilder(3));
+		inv.setItem(20, new ItemStack(Material.GLASS));
 		inv.setItem(21, xpStorageBuilder(3));
-		inv.setItem(28, new ItemStack(Material.GLASS));
-		inv.setItem(29, xpStorageBuilder(3));
-		inv.setItem(30, new ItemStack(Material.GLASS));
-		inv.setItem(47, xpStorageBuilder(4));
-				
-		inv.setItem(14, new ItemStack(Material.GLASS));
+		inv.setItem(22, new ItemStack(Material.GLASS));
 		inv.setItem(15, xpStorageBuilder(4));
-		inv.setItem(16, new ItemStack(Material.GLASS));
-		inv.setItem(23, xpStorageBuilder(4));
-		inv.setItem(24, new ItemStack(Material.NETHER_STAR));
-		inv.setItem(25, xpStorageBuilder(4));
-		inv.setItem(32, new ItemStack(Material.GLASS));
-		inv.setItem(33, xpStorageBuilder(4));
-		inv.setItem(34, new ItemStack(Material.GLASS));
-		inv.setItem(51, xpStorageBuilder(5));
+		this.invs.put(4, inv);
 		
-		return inv;
+		
+		inv = Bukkit.createInventory(null, 27, "§8XP Storage Tier V");
+		inv.setItem(0, new ItemBuilder(Material.BARRIER, "§cPrevious <-", 1).getItem());
+		
+		inv.setItem(2, new ItemStack(Material.GLASS));
+		inv.setItem(3, xpStorageBuilder(4));
+		inv.setItem(4, new ItemStack(Material.GLASS));
+		inv.setItem(11, xpStorageBuilder(4));
+		inv.setItem(12, new ItemStack(Material.NETHER_STAR));
+		inv.setItem(13, xpStorageBuilder(4));
+		inv.setItem(20, new ItemStack(Material.GLASS));
+		inv.setItem(21, xpStorageBuilder(4));
+		inv.setItem(22, new ItemStack(Material.GLASS));
+		inv.setItem(15, xpStorageBuilder(5));
+		this.invs.put(5, inv);
+		
+		return invs;
 	}
 	
 	public static int getXpStored(ItemStack item) {
